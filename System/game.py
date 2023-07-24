@@ -1,9 +1,9 @@
 import pygame
 
-from System.collision import Collision
+from Collision.collision import Collision
 from Controls.input import Input
 from Screen.window import Window
-from System.polygon import Polygon
+from Collision.polygon import Polygon
 from World.map import Map
 from Entity.character import Character
 

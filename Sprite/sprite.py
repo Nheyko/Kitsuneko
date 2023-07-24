@@ -4,7 +4,7 @@ from pygame.locals import *
 from Sprite.animation import Animation
 from Sprite.coordinate import Coordinate
 from Sprite.direction import Direction
-from System.collision import Collision
+from Collision.collision import Collision
 from collections import defaultdict
 
 from PIL import Image
