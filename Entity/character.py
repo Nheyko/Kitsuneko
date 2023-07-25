@@ -4,7 +4,8 @@ class Character:
 
     def __init__(self):
         url = 'Assets/Sprites/Characters/player.png'
-        self.sprite = Sprite(url)
+        self.sprite = Sprite()
+        self.sprite.set_character_sprite(url)
         self.move_speed = 2
 
     def get_sprite(self):

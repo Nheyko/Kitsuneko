@@ -14,23 +14,15 @@ sprite_height = 32
 
 class Sprite(pygame.sprite.Sprite):
 
-    # def __init__(self, url):
-    def __init__(self):
+    def __init__(self, url):
         super().__init__()
 
         self.animator = Animation()
         self.position = Coordinate()
-        self.image = pygame.Surface((0,0))
-        self.rect = self.image.get_rect()
-
-        self.collider = Collision.create_collider(0, 0, self.rect.width * 0.5, sprite_height / 3)
-        self.old_position = self.position.get_coordinate().copy()
-
-    def set_character_sprite(self, url):
 
         self.sprite_sheet = self.slice_sprite_sheet(url)
         self.sprites = self.turn_image_into_sprites(self.sprite_sheet)
-
+        
         self.image = self.sprites[0]
         self.image.set_colorkey([0,0,0])
         self.rect = self.image.get_rect()
@@ -45,6 +37,9 @@ class Sprite(pygame.sprite.Sprite):
             Direction.UP_LEFT: self.sprites[3],
             Direction.UP_RIGHT: self.sprites[3],
         }
+
+        self.collider = Collision.create_collider(0, 0, self.rect.width * 0.5, sprite_height / 3)
+        self.old_position = self.position.get_coordinate().copy()
 
     def move(self, speed, Direction):
 
@@ -118,6 +113,9 @@ class Sprite(pygame.sprite.Sprite):
         img.close()
         return sprite_sheet
 
+    def save_location(self):
+        self.old_position = self.position.get_coordinate().copy()
+
     def turn_image_into_sprites(self, sprite_sheet):
         sprites = []
 
@@ -133,9 +131,6 @@ class Sprite(pygame.sprite.Sprite):
             sprites.append(surface)
 
         return sprites
-
-    def save_location(self):
-        self.old_position = self.position.get_coordinate().copy()
 
     def set_position(self, x, y):
         self.position.set_coordinate(x, y)
@@ -155,15 +150,8 @@ class Sprite(pygame.sprite.Sprite):
         image.set_colorkey([0,0,0])
         self.set_image(image)
 
-    def get_image(self):
-        return self.image
-
     def set_image(self, image):
         self.image = image
 
     def get_position(self):
         return self.position
-    
-    def convert_surface_to_sprite(self, surface):
-        self.image = surface
-        self.rect = self.image.get_rect()

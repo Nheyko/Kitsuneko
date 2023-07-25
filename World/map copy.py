@@ -13,21 +13,30 @@ class Map:
         self.debug_layer = False
         self.map_objects = []
 
+        # print(self.tmx_data.get_tile_image(9,9,0))
+
+        # layers = self.tmx_data.layers
+        # for layer in layers:
+        #     print(dir(layer))
+
+        # self.path = self.tmx_data.get_layer_by_name('path')
+        # print(dir(self.path))
+
+        # print(dir(self.tmx_data))
+        # print(type(self.tmx_data))
+        # self.map_layer.zoom = 2
+
     def add_sprites(self, sprites):
         for sprite in sprites:
             self.map.add(sprite.get_sprite())
 
-    def remove_sprites(self, sprites):
-        for sprite in sprites:
-            self.map.remove(sprite.get_sprite())
-
-    def add_sprite(self, sprite):
+    def add_surface(self, surface):
         self.set_is_debug_layer_activated(True)
-        self.map.add(sprite)
+        self.map.add(surface)
 
-    def remove_sprite(self, sprite):
+    def remove_surface(self, surface):
         self.set_is_debug_layer_activated(False)
-        self.map.remove(sprite)
+        self.map.remove(surface)
 
     def is_debug_layer_activated(self):
         return self.debug_layer
@@ -47,10 +56,10 @@ class Map:
     def get_tmx_data(self):
         return self.tmx_data
     
-    def search_all_objects(self):
+    def get_map_objects(self):
         object_layer = self.tmx_data.get_layer_by_name('objects')
         for obj in object_layer:
             self.map_objects.append(obj)
 
-    def get_map_objects(self):
+    def map_objects(self):
         return self.map_objects

@@ -1,9 +1,13 @@
-import pygame
+class Polygon():
 
-class Polygon(pygame.sprite.Sprite):
+    def __init__(self):
+        self.polygons = []
+    
+    def add_polygons_in_objects(self, objects):
 
-    def __init__(self, surface):
-        pygame.sprite.Sprite.__init__(self)
+        for collider_polygon in objects:
+            if collider_polygon.type == 'polygon' :
+                self.polygons.append(collider_polygon)
 
-        self.image = surface
-        self.rect = self.image.get_rect() # size and position
+    def get(self):
+        return self.polygons
