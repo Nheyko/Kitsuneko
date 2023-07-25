@@ -12,6 +12,7 @@ class Map:
         self.map = pyscroll.PyscrollGroup(map_layer=self.map_layer, default_layer=3)
         self.debug_layer = False
         self.map_objects = []
+        # self.map_layer.zoom = 2
 
     def add_sprites(self, sprites):
         for sprite in sprites:

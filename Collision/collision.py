@@ -11,14 +11,14 @@ class Collision:
                 if obj.properties['collision'] == True:
                     self.collider_objects.append(obj)
 
-    def detect_collision(self, collider1, collider2):
-        if collider1.get_collider().overlap(collider2.get_collider(), (collider1.x, collider1.y)):
+    def detect_collision(self, character, collider, collider_objects):
+        
+        if character.get_sprite().get_collider().overlap(collider.get_mask(), (collider_objects[1].x - character.get_sprite().get_position().x, collider_objects[1].y - character.get_sprite().get_position().y)):
             print("detected")
         else:
             print("not detected")
             
     def draw_colliders_on_surface(self, map_surface, collider_objects):
-
         for collider in collider_objects:
             points = [(point.x, point.y) for point in collider.points]
             pygame.draw.polygon(map_surface, 'red', points)

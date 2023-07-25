@@ -1,6 +1,7 @@
 import pygame
 from pygame.locals import *
 
+from Collision.collider import Collider
 from Sprite.animation import Animation
 from Sprite.coordinate import Coordinate
 from Sprite.direction import Direction
@@ -17,6 +18,7 @@ class Sprite(pygame.sprite.Sprite):
         super().__init__()
 
         self.animator = Animation()
+        self.collider = Collider()
         self.position = Coordinate()
         self.image = pygame.Surface((0,0))
         self.rect = self.image.get_rect()
@@ -162,4 +164,7 @@ class Sprite(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
 
     def get_collider(self):
-        return self.collider
+        return self.collider.get_mask()
+    
+    def set_collider(self, surface):
+        self.collider.set_mask(surface)

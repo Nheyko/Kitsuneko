@@ -20,44 +20,70 @@ class Game:
         # Initialisation des objets
         self.window = Window(screen_width,screen_height)
 
+        # Création d'un personnage
         self.character = Character()
+
+        # Ajout du collider au personnage
+        self.character.get_sprite().set_collider(self.character.get_sprite().get_image())
+
+        # Ajout du personnage dans une liste
         self.character_list = []
         self.character_list.append(self.character)
 
+        # Création de la carte
         self.map = Map(self.window)
+
+        # Ajout des Sprites des personnages sur la carte
         self.map.add_sprites(self.character_list)
+
+        # Cherche tout les objets du layer object dans Tmx_data et les enregistre dans un tableau
         self.map.search_all_objects()
+
+        # On récupère le tableau
         self.map_objects = self.map.get_map_objects()
 
-        # Création d'une surface pour y intégrer les polygons
+        # Création d'une nouvelle surface
         self.map_surface = pygame.Surface((self.map.width(), self.map.height()), pygame.SRCALPHA)
 
-        # Converti map_surface en sprite
+        # Création d'un nouvel objet Sprite
         self.map_surface_sprite = Sprite()
-        self.map_surface_sprite.convert_surface_to_sprite(self.map_surface)
 
+        # Création d'un objet Polygon
         self.polygon = Polygon()
+
+        # On ajoute la liste des polygons qui étaient dans objects dans un tableau de l'objet
         self.polygon.add_polygons_in_objects(self.map_objects)
+
+        # On récupère le tableau de polygone dans une variable
         self.polygons = self.polygon.get()
 
-        self.polygon.transform_polygons_in_surface()
-        self.polygon_surfaces = self.polygon.get_polygon_surfaces()
-
+        # Création du moteur de collision
         self.collision = Collision()
+
+        # On ajoute dans le tableau de l'objet tout les polygones qui étaient des colliders
         self.collision.add_collider_objects(self.polygons)
+
+        # On récupère le tableau de collider
         self.colliders_objects = self.collision.get_collider_objects()
+
+        # Converti la surface en Sprite pour pouvoir afficher les polygones
+        self.map_surface_sprite.convert_surface_to_sprite(self.map_surface)
+
+        # Déssine tous les objets qui sont des colliders sur la surface self.map_surface
+        # Permet de les afficher avec map.add_surface plus tard
         self.collision.draw_colliders_on_surface(self.map_surface, self.colliders_objects)
 
-        self.character_collider = Collider()
-        self.character_collider.set_collider(self.character.get_sprite().get_image())
-        # self.character_collider.set_image()
+        # Crée une surface pour chaque polygon dans le tableau Polygon de l'objet
+        self.polygon.transform_polygons_in_surface()
+
+        # On récupère toutes les surfaces des polygones
+        self.polygon_surfaces = self.polygon.get_polygon_surfaces()
+
+        # Remplacer ces lignes
         self.polygon_collider = Collider()
-        self.polygon_collider.set_collider(self.polygon_surfaces[0])
-        # self.polygon_collider.set_image()
+        self.polygon_collider.set_mask(self.polygon_surfaces[1])
 
-        # self.character_mask_image = self.character_collider.get_image()
-        # self.polygon_mask_image = self.polygon_collider.get_image()
-
+        # Création de l'objet qui permet de gérer les entrées clavier
         self.keyboard_input = Keyboard()
 
         # Obtention de la position du joueur par les données du tmx enregistré dans la carte
@@ -73,7 +99,7 @@ class Game:
             
                 # isCollision = self.collision.detect_collision(self.character_list, self.get_all_collision)
                 # if(isCollision != True):
-                    self.collision.detect_collision(self.character, self.pol)
+                    self.collision.detect_collision(self.character, self.polygon_collider, self.colliders_objects)
                     self.character.get_sprite().save_location()
                     self.character.get_sprite().move(self.character.get_move_speed(), self.keyboard_input.direction_of(self.keyboard_input.key_pressed()))
 
@@ -92,18 +118,17 @@ class Game:
                         self.antispam = True
 
     def update(self):
+
          # Met à jour la position du joueur quand il se déplace
         self.character.get_sprite().update_position()
 
         # centre la carte sur la position du joueur
         self.map.get_map().center(self.character.get_sprite().get_rect().center)
 
-        # met à jour la carte et la dessine
+        # met à jour la carte
         self.map.get_map().draw(self.window.get_screen())
 
-        # self.window.get_screen().blit(self.polygon_mask_image, (0,0))
-        # self.window.get_screen().blit(self.character_mask_image, (0,0))
-
+        # Met à jour l'écran
         pygame.display.flip()
 
     def run(self):

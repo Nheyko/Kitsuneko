@@ -6,10 +6,10 @@ class Collider:
         self.mask = None
         self.image = None
 
-    def set_collider(self, surface):
+    def set_mask(self, surface):
         self.mask = pygame.mask.from_surface(surface)
 
-    def get_collider(self):
+    def get_mask(self):
         return self.mask
     
     def set_image(self):
