@@ -1,8 +1,10 @@
+from Entity.entity import Entity
 from Sprite.sprite import Sprite
 
-class Character:
+class Character(Entity):
 
     def __init__(self):
+        super().__init__()
         url = 'Assets/Sprites/Characters/player.png'
         self.sprite = Sprite()
         self.sprite.set_character_sprite(url)
