@@ -1,11 +1,12 @@
 import pygame
+from Collision.collider import Collider
 
 from Collision.collision import Collision
-from Controls.input import Input
+from Controls.keyboard import Keyboard
 from Screen.window import Window
-from Collision.polygon import Polygon
+from Map.polygon import Polygon
 from Sprite.sprite import Sprite
-from World.map import Map
+from Map.map import Map
 from Entity.character import Character
 
 screen_width = 800
@@ -38,13 +39,26 @@ class Game:
         self.polygon = Polygon()
         self.polygon.add_polygons_in_objects(self.map_objects)
         self.polygons = self.polygon.get()
-        
+
+        self.polygon.transform_polygons_in_surface()
+        self.polygon_surfaces = self.polygon.get_polygon_surfaces()
+
         self.collision = Collision()
-        self.collision.add_all_collider_objects(self.map_objects)
-        self.colliders_objects = self.collision.get()
+        self.collision.add_collider_objects(self.polygons)
+        self.colliders_objects = self.collision.get_collider_objects()
         self.collision.draw_colliders_on_surface(self.map_surface, self.colliders_objects)
 
-        self.input = Input()
+        self.character_collider = Collider()
+        self.character_collider.set_collider(self.character.get_sprite().get_image())
+        # self.character_collider.set_image()
+        self.polygon_collider = Collider()
+        self.polygon_collider.set_collider(self.polygon_surfaces[0])
+        # self.polygon_collider.set_image()
+
+        # self.character_mask_image = self.character_collider.get_image()
+        # self.polygon_mask_image = self.polygon_collider.get_image()
+
+        self.keyboard_input = Keyboard()
 
         # Obtention de la position du joueur par les données du tmx enregistré dans la carte
         character_position = self.map.get_tmx_data().get_object_by_name("player")
@@ -55,17 +69,18 @@ class Game:
     def handler(self):
         if pygame.key.get_pressed():
 
-            if self.input.is_direction_key_pressed():
+            if self.keyboard_input.is_direction_key_pressed():
             
                 # isCollision = self.collision.detect_collision(self.character_list, self.get_all_collision)
                 # if(isCollision != True):
+                    self.collision.detect_collision(self.character, self.pol)
                     self.character.get_sprite().save_location()
-                    self.character.get_sprite().move(self.character.get_move_speed(), self.input.direction_of(self.input.key_pressed()))
+                    self.character.get_sprite().move(self.character.get_move_speed(), self.keyboard_input.direction_of(self.keyboard_input.key_pressed()))
 
                 # else:
                 #     self.character.get_sprite().move_back()
 
-            if self.input.is_letter_key_pressed():
+            if self.keyboard_input.is_letter_key_pressed():
                     if(self.map.is_debug_layer_activated() == False and self.antispam == False):
                         self.starttime = pygame.time.get_ticks()
                         self.map.add_sprite(self.map_surface_sprite)
@@ -85,6 +100,9 @@ class Game:
 
         # met à jour la carte et la dessine
         self.map.get_map().draw(self.window.get_screen())
+
+        # self.window.get_screen().blit(self.polygon_mask_image, (0,0))
+        # self.window.get_screen().blit(self.character_mask_image, (0,0))
 
         pygame.display.flip()
 

@@ -5,22 +5,17 @@ class Collision:
     def __init__(self) -> None:
         self.collider_objects = []
 
-    def add_all_collider_objects(self, objects):
-
+    def add_collider_objects(self, objects):
         for obj in objects:
             if 'collision' in obj.properties.keys():
                 if obj.properties['collision'] == True:
                     self.collider_objects.append(obj)
-    
-    def create_collider(x, y, width, height):
-        rect = pygame.Rect(x, y, width, height)
-        return rect
 
-    def detect_collision(self, character_objects, collider_objects):
-        for character in character_objects:
-            if character.get_sprite().get_collider().collideobjects(collider_objects) > -1:
-                return True
-        pass
+    def detect_collision(self, collider1, collider2):
+        if collider1.get_collider().overlap(collider2.get_collider(), (collider1.x, collider1.y)):
+            print("detected")
+        else:
+            print("not detected")
             
     def draw_colliders_on_surface(self, map_surface, collider_objects):
 
@@ -28,5 +23,5 @@ class Collision:
             points = [(point.x, point.y) for point in collider.points]
             pygame.draw.polygon(map_surface, 'red', points)
     
-    def get(self):
+    def get_collider_objects(self):
         return self.collider_objects

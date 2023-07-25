@@ -4,7 +4,6 @@ from pygame.locals import *
 from Sprite.animation import Animation
 from Sprite.coordinate import Coordinate
 from Sprite.direction import Direction
-from Collision.collision import Collision
 from collections import defaultdict
 
 from PIL import Image
@@ -14,7 +13,6 @@ sprite_height = 32
 
 class Sprite(pygame.sprite.Sprite):
 
-    # def __init__(self, url):
     def __init__(self):
         super().__init__()
 
@@ -22,8 +20,6 @@ class Sprite(pygame.sprite.Sprite):
         self.position = Coordinate()
         self.image = pygame.Surface((0,0))
         self.rect = self.image.get_rect()
-
-        self.collider = Collision.create_collider(0, 0, self.rect.width * 0.5, sprite_height / 3)
         self.old_position = self.position.get_coordinate().copy()
 
     def set_character_sprite(self, url):
@@ -142,10 +138,7 @@ class Sprite(pygame.sprite.Sprite):
 
     def update_position(self):
         self.rect.topleft = self.position.get_coordinate()
-        self.collider.midbottom = self.rect.midbottom
-
-    def get_collider(self):
-        return self.collider
+        # self.collider.midbottom = self.rect.midbottom
     
     def get_rect(self):
         return self.rect
@@ -167,3 +160,6 @@ class Sprite(pygame.sprite.Sprite):
     def convert_surface_to_sprite(self, surface):
         self.image = surface
         self.rect = self.image.get_rect()
+
+    def get_collider(self):
+        return self.collider
