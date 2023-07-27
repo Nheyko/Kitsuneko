@@ -55,7 +55,7 @@ class Game:
         self.polygon.add_polygons_in_objects(self.map_objects)
 
         # On récupère le tableau de polygone dans une variable
-        self.polygons = self.polygon.get()
+        self.polygons = self.polygon.get_polygons()
 
         # Création du moteur de collision
         self.collision = Collision()
