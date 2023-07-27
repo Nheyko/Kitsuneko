@@ -1,7 +1,6 @@
 import pygame
 from pygame.locals import *
 
-from Collision.collider import Collider
 from Sprite.animation import Animation
 from Sprite.coordinate import Coordinate
 from Sprite.direction import Direction
@@ -18,13 +17,13 @@ class Sprite(pygame.sprite.Sprite):
         super().__init__()
 
         self.animator = Animation()
-        self.collider = Collider()
         self.position = Coordinate()
 
         self.image = pygame.Surface((0,0))
         self.rect = self.image.get_rect()
-        self.old_sprite_direction = self.image.copy()
+
         self.old_position = self.position.get_coordinate().copy()
+        self.old_sprite_direction = self.image.copy()
 
     def set_character_sprite(self, url):
 
@@ -34,7 +33,7 @@ class Sprite(pygame.sprite.Sprite):
         self.image = self.sprites[0]
         self.image.set_colorkey([0,0,0])
         self.rect = self.image.get_rect()
-        self.collider.set_mask(self.image)
+        self.position.set_coordinate(0,0)
 
         self.images = {
             Direction.DOWN: self.sprites[0],
@@ -90,14 +89,13 @@ class Sprite(pygame.sprite.Sprite):
 
     def update_position(self):
         self.rect.topleft = self.position.get_coordinate()
-        # self.collider.midbottom = self.rect.midbottom
+        # self.collider_box.midbottom = self.rect.midbottom
 
     def change_direction(self, images, Direction):
         image = self.animator.change_direction(images, Direction)
         image.set_colorkey([0,0,0])
         self.rect.topleft = self.position.get_coordinate()
         self.set_image(image)
-        self.collider.set_mask(image)
 
     def is_void(self, img):
 

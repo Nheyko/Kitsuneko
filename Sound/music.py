@@ -11,4 +11,4 @@ class Music:
         # Setting the volume
         mixer.music.set_volume(0.5)
 
-        mixer.music.play(-1)
+        # mixer.music.play(-1)

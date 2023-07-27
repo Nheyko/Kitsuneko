@@ -86,20 +86,24 @@ class Game:
         self.character.get_sprite().set_position(character_position.x, character_position.y)
         
         # Synchronise la position du rect avec la position du joueur pour éviter d'éventuel bugs
-        self.character.get_sprite().set_rect(character_position.x, character_position.y, self.character.get_sprite().get_rect().width, self.character.get_sprite().get_rect().height)
+        self.character.get_sprite().update_position()
 
     def handler(self):
+
+        # wait 2000 milliseconds before executing this 
+        if self.antispam == True and pygame.time.get_ticks() - self.starttime >= 500:
+            self.antispam = False
+
         if pygame.key.get_pressed():
             if self.keyboard_input.is_direction_key_pressed():
+                    isCollision = self.collision.detect_collision(self.character, self.collider_group)
+                    if isCollision == False:
+                        self.character.get_sprite().save_location()
+                        self.character.get_sprite().save_sprite_direction()
+                        self.character.get_sprite().move(self.character.get_move_speed(), self.keyboard_input.direction_of(self.keyboard_input.key_pressed()))
 
-                isCollision = self.collision.detect_collision(self.character, self.collider_group)
-                if isCollision == False:
-                    self.character.get_sprite().save_location()
-                    self.character.get_sprite().save_sprite_direction()
-                    self.character.get_sprite().move(self.character.get_move_speed(), self.keyboard_input.direction_of(self.keyboard_input.key_pressed()))
-
-                else:
-                    self.character.get_sprite().move_back()
+                    else:
+                        self.character.get_sprite().move_back()
 
             if self.keyboard_input.is_letter_key_pressed():
                     if(self.map.is_debug_layer_activated() == False and self.antispam == False):
@@ -134,10 +138,6 @@ class Game:
         # Boucle du jeu
         running = True
         while running:
-
-            # wait 2000 milliseconds before executing this 
-            if self.antispam == True and pygame.time.get_ticks() - self.starttime >= 500:
-                self.antispam = False
 
             self.handler()
             self.update()
