@@ -1,25 +1,26 @@
 import pygame
 
+from Sprite.sprite import Sprite
+
 class Polygon():
 
     def __init__(self):
-        self.polygons = []
-        self.polygon_surfaces = []
-    
-    def add_polygons_in_objects(self, objects):
-        for collider_polygon in objects:
-            if collider_polygon.type == 'polygon' :
-                self.polygons.append(collider_polygon)
+        self.sprite = Sprite()
+        self.points = []
 
-    def transform_polygons_in_surface(self):
-        for polygon in self.polygons:
-            surface = pygame.Surface((polygon.width, polygon.height), pygame.SRCALPHA)
-            points = [(point.x - polygon.x, point.y - polygon.y) for point in polygon.points]
-            pygame.draw.polygon(surface, 'red', points)
-            self.polygon_surfaces.append(surface)
+    def create_polygon(self, polygon_object):
+            surface = pygame.Surface((polygon_object.width, polygon_object.height), pygame.SRCALPHA)
+            self.set_points([(point.x - polygon_object.x, point.y - polygon_object.y) for point in polygon_object.points])
+            pygame.draw.polygon(surface, 'blue', self.points)
+            self.sprite.set_rect(polygon_object.x, polygon_object.y, polygon_object.width, polygon_object.height)
+            self.sprite.set_image(surface)
+            self.sprite.set_collider(surface)
 
-    def get_polygons(self):
-        return self.polygons
+    def get_sprite(self):
+        return self.sprite
+
+    def get_points(self):
+        return self.points
     
-    def get_polygon_surfaces(self):
-        return self.polygon_surfaces
+    def set_points(self, points):
+        self.points = points

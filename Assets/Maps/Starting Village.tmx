@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="30">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="31">
  <tileset firstgid="1" source="nature.tsx"/>
  <layer id="1" name="background" width="50" height="50">
   <data encoding="csv">
@@ -233,11 +233,11 @@
    </properties>
    <polygon points="0,0 224,0 224,224 192,224 192,32 0,32"/>
   </object>
-  <object id="11" name="Water SE" type="polygon" x="608" y="416">
+  <object id="11" name="Water SE" type="polygon" x="416" y="416">
    <properties>
     <property name="collision" type="bool" value="true"/>
    </properties>
-   <polygon points="0,0 32,0 32,224 -192,224 -192,192 0,192"/>
+   <polygon points="224,0 192,0 192,192 0,192 0,224 224,224"/>
   </object>
   <object id="9" name="Water SW" type="polygon" x="160" y="416">
    <properties>
@@ -245,11 +245,11 @@
    </properties>
    <polygon points="0,0 32,0 32,192 224,192 224,224 0,224"/>
   </object>
-  <object id="12" name="Wall NW" type="polygon" x="384" y="0">
+  <object id="12" name="Wall NW" type="polygon" x="0" y="0">
    <properties>
     <property name="collision" type="bool" value="true"/>
    </properties>
-   <polygon points="0,0 0,32 -352,32 -352,384 -384,384 -384,0"/>
+   <polygon points="384,0 384,32 32,32 32,384 0,384 0,0"/>
   </object>
   <object id="13" name="Wall NE" type="polygon" x="416" y="0">
    <properties>
@@ -257,11 +257,11 @@
    </properties>
    <polygon points="0,0 384,0 384,384 352,384 352,32 0,32"/>
   </object>
-  <object id="14" name="Wall SE" type="polygon" x="800" y="416">
+  <object id="14" name="Wall SE" type="polygon" x="416" y="416">
    <properties>
     <property name="collision" type="bool" value="true"/>
    </properties>
-   <polygon points="0,0 0,384 -384,384 -384,352 -32,352 -32,0"/>
+   <polygon points="384,0 384,384 0,384 0,352 352,352 352,0"/>
   </object>
   <object id="15" name="Wall SW" type="polygon" x="0" y="416">
    <properties>

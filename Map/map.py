@@ -16,7 +16,7 @@ class Map:
 
     def add_sprites(self, sprites):
         for sprite in sprites:
-            self.map.add(sprite.get_sprite())
+            self.map.add(sprite)
 
     def remove_sprites(self, sprites):
         for sprite in sprites:

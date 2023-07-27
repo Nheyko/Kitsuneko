@@ -11,17 +11,23 @@ class Collision:
                 if obj.properties['collision'] == True:
                     self.collider_objects.append(obj)
 
-    def detect_collision(self, character, collider, collider_objects):
-        
-        if character.get_sprite().get_collider().overlap(collider.get_mask(), (collider_objects[1].x - character.get_sprite().get_position().x, collider_objects[1].y - character.get_sprite().get_position().y)):
-            print("detected")
+    def detect_collision(self, character, collider_sprite_group):
+
+        # Permet de checker d'abord si on rentre dans un rect pour eviter de tout le temps regarder tout les colliders
+        if pygame.sprite.spritecollide(character.get_sprite(), collider_sprite_group, False):
+            # Ensuite, check les 2 masks qui sont concerné
+            if pygame.sprite.spritecollide(character.get_sprite(), collider_sprite_group, False, pygame.sprite.collide_mask):
+                return True
+            else:
+                return False
         else:
-            print("not detected")
-            
-    def draw_colliders_on_surface(self, map_surface, collider_objects):
-        for collider in collider_objects:
-            points = [(point.x, point.y) for point in collider.points]
-            pygame.draw.polygon(map_surface, 'red', points)
+            return False
+
+    def draw_colliders_on_surface(self, map_surface):
+        for collider in self.collider_objects:
+            if collider.type == 'polygon':
+                points = [(point.x, point.y) for point in collider.points]
+                pygame.draw.polygon(map_surface, 'red', points)
     
     def get_collider_objects(self):
         return self.collider_objects

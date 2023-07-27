@@ -20,8 +20,10 @@ class Sprite(pygame.sprite.Sprite):
         self.animator = Animation()
         self.collider = Collider()
         self.position = Coordinate()
+
         self.image = pygame.Surface((0,0))
         self.rect = self.image.get_rect()
+        self.old_sprite_direction = self.image.copy()
         self.old_position = self.position.get_coordinate().copy()
 
     def set_character_sprite(self, url):
@@ -32,6 +34,7 @@ class Sprite(pygame.sprite.Sprite):
         self.image = self.sprites[0]
         self.image.set_colorkey([0,0,0])
         self.rect = self.image.get_rect()
+        self.collider.set_mask(self.image)
 
         self.images = {
             Direction.DOWN: self.sprites[0],
@@ -76,8 +79,25 @@ class Sprite(pygame.sprite.Sprite):
 
     def move_back(self):
         self.position.set_coordinate(self.old_position[0], self.old_position[1])
+        self.set_image(self.old_sprite_direction)
+        self.update_position()
+
+    def save_sprite_direction(self):
+        self.old_sprite_direction = self.image
+
+    def save_location(self):
+        self.old_position = self.position.get_coordinate().copy()
+
+    def update_position(self):
         self.rect.topleft = self.position.get_coordinate()
-        self.collider.midbottom = self.rect.midbottom
+        # self.collider.midbottom = self.rect.midbottom
+
+    def change_direction(self, images, Direction):
+        image = self.animator.change_direction(images, Direction)
+        image.set_colorkey([0,0,0])
+        self.rect.topleft = self.position.get_coordinate()
+        self.set_image(image)
+        self.collider.set_mask(image)
 
     def is_void(self, img):
 
@@ -95,10 +115,6 @@ class Sprite(pygame.sprite.Sprite):
 
         width = img.width
         height = img.height
-  
-        # display width and height
-        # print("The height of the image is: ", height)
-        # print("The width of the image is: ", width)
 
         i = 1
 
@@ -132,23 +148,14 @@ class Sprite(pygame.sprite.Sprite):
 
         return sprites
 
-    def save_location(self):
-        self.old_position = self.position.get_coordinate().copy()
-
     def set_position(self, x, y):
         self.position.set_coordinate(x, y)
-
-    def update_position(self):
-        self.rect.topleft = self.position.get_coordinate()
-        # self.collider.midbottom = self.rect.midbottom
     
     def get_rect(self):
         return self.rect
     
-    def change_direction(self, images, Direction):
-        image = self.animator.change_direction(images, Direction)
-        image.set_colorkey([0,0,0])
-        self.set_image(image)
+    def set_rect(self, x, y, width, height):
+        self.rect = pygame.Rect(x, y, width, height)
 
     def get_image(self):
         return self.image
