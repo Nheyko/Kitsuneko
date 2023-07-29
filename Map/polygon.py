@@ -14,6 +14,9 @@ class Polygon():
             pygame.draw.polygon(surface, 'blue', self.points)
             self.sprite.set_rect(polygon_object.x, polygon_object.y, polygon_object.width, polygon_object.height)
             self.sprite.set_image(surface)
+            self.sprite.set_position(polygon_object.x, polygon_object.y)
+            self.sprite.set_name(polygon_object.name)
+            self.sprite.set_collider(surface)
 
     def get_sprite(self):
         return self.sprite

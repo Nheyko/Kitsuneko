@@ -8,4 +8,9 @@ Direction = Enum('Direction', ['NONE',
                                'DOWN_LEFT',
                                'DOWN_RIGHT',
                                'LEFT',
-                               'RIGHT'])
+                               'LEFT_UP',
+                               'LEFT_DOWN',
+                               'RIGHT',
+                               'RIGHT_UP',
+                               'RIGHT_DOWN'
+                               ])

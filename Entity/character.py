@@ -8,7 +8,8 @@ class Character(Entity):
         url = 'Assets/Sprites/Characters/player.png'
         self.sprite = Sprite()
         self.sprite.set_character_sprite(url)
-        self.move_speed = 2
+        self.collider_sprite = Sprite()
+        self.move_speed = 3
 
     def get_sprite(self):
         return self.sprite
@@ -21,3 +22,7 @@ class Character(Entity):
     
     def set_move_speed(self, speed):
         self.move_speed = speed
+
+    def get_collider_sprite(self):
+        return self.collider_sprite
+    
