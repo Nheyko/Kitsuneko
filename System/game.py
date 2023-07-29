@@ -103,8 +103,11 @@ class Game:
                 
                 elif isCollision == True and self.character.get_sprite().get_direction() == Direction.UP:
 
-                    if self.collision.check_collision(self.character, self.polygons, Direction.LEFT):
+                    if self.collision.check_collision(self.character, self.polygons, Direction.LEFT) and self.keyboard_input.key_pressed() == 3:
                         self.character.get_sprite().change_direction(self.character.get_sprite().get_images(), Direction.LEFT)
+
+                    elif self.collision.check_collision(self.character, self.polygons, Direction.RIGHT) and self.keyboard_input.key_pressed() == 4:
+                        self.character.get_sprite().change_direction(self.character.get_sprite().get_images(), Direction.RIGHT)
 
                     if self.keyboard_input.direction_of(self.keyboard_input.key_pressed()) == Direction.UP_LEFT:
                         
@@ -140,6 +143,12 @@ class Game:
 
                 elif isCollision == True and self.character.get_sprite().get_direction() == Direction.DOWN:
 
+                    if self.collision.check_collision(self.character, self.polygons, Direction.LEFT) and self.keyboard_input.key_pressed() == 3:
+                        self.character.get_sprite().change_direction(self.character.get_sprite().get_images(), Direction.LEFT)
+
+                    elif self.collision.check_collision(self.character, self.polygons, Direction.RIGHT) and self.keyboard_input.key_pressed() == 4:
+                        self.character.get_sprite().change_direction(self.character.get_sprite().get_images(), Direction.RIGHT)
+
                     if self.keyboard_input.direction_of(self.keyboard_input.key_pressed()) == Direction.DOWN_LEFT:
 
                         if self.collision.check_collision(self.character, self.polygons, Direction.DOWN) == False:
@@ -174,6 +183,12 @@ class Game:
 
                 elif isCollision == True and self.character.get_sprite().get_direction() == Direction.LEFT:
 
+                    if self.collision.check_collision(self.character, self.polygons, Direction.UP) and self.keyboard_input.key_pressed() == 1:
+                        self.character.get_sprite().change_direction(self.character.get_sprite().get_images(), Direction.UP)
+
+                    elif self.collision.check_collision(self.character, self.polygons, Direction.DOWN) and self.keyboard_input.key_pressed() == 2:
+                        self.character.get_sprite().change_direction(self.character.get_sprite().get_images(), Direction.DOWN)
+
                     if self.keyboard_input.direction_of(self.keyboard_input.key_pressed()) == Direction.UP_LEFT:
 
                         if self.collision.check_collision(self.character, self.polygons, Direction.UP) == False:
@@ -207,6 +222,12 @@ class Game:
                             self.character.get_sprite().move(self.character.get_move_speed(), Direction.RIGHT, self.character.get_sprite().get_direction())
 
                 elif isCollision == True and self.character.get_sprite().get_direction() == Direction.RIGHT:
+
+                    if self.collision.check_collision(self.character, self.polygons, Direction.UP) and self.keyboard_input.key_pressed() == 1:
+                        self.character.get_sprite().change_direction(self.character.get_sprite().get_images(), Direction.UP)
+
+                    elif self.collision.check_collision(self.character, self.polygons, Direction.DOWN) and self.keyboard_input.key_pressed() == 2:
+                        self.character.get_sprite().change_direction(self.character.get_sprite().get_images(), Direction.DOWN)
 
                     if self.keyboard_input.direction_of(self.keyboard_input.key_pressed()) == Direction.UP_RIGHT:
 
