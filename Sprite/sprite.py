@@ -107,6 +107,21 @@ class Sprite(pygame.sprite.Sprite):
         self.set_direction(Direction)
         self.collider.set_mask(self.image)
 
+    def count_self_pixels(self, img):
+        by_color = defaultdict(int)
+
+        number_of_pixel = 0
+        lines_of_pixel = []
+        number_of_pixel = 0
+
+        for pixel in img.getdata():
+            for _ in range(32):
+                by_color[pixel] += 1
+                if(pixel != (0,0,0,0)):
+                    pass
+
+        return number_of_pixel
+
     def is_void(self, img):
 
         by_color = defaultdict(int)

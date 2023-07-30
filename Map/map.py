@@ -6,7 +6,7 @@ class Map:
     def __init__(self, window):
 
         # Chargement de la carte
-        self.tmx_data = pytmx.util_pygame.load_pygame('Assets/Maps/Starting Village.tmx')
+        self.tmx_data = pytmx.util_pygame.load_pygame('Assets/Maps/Starting village.tmx')
         map_data = pyscroll.data.TiledMapData(self.tmx_data)
         self.map_layer = pyscroll.orthographic.BufferedRenderer(map_data, window.get_screen().get_size())
         self.map = pyscroll.PyscrollGroup(map_layer=self.map_layer, default_layer=3)
@@ -49,9 +49,17 @@ class Map:
         return self.tmx_data
     
     def search_all_objects(self):
-        object_layer = self.tmx_data.get_layer_by_name('objects')
-        for obj in object_layer:
-            self.map_objects.append(obj)
+        obstacle_layer = self.tmx_data.get_layer_by_name('obstacle')
+        for obstacle in obstacle_layer:
+            self.map_objects.append(obstacle)
+
+        player_layer = self.tmx_data.get_layer_by_name('player')
+        for player in player_layer:
+            self.map_objects.append(player)
+
+        tp_layer = self.tmx_data.get_layer_by_name('tp')
+        for tp in tp_layer:
+            self.map_objects.append(tp)
 
     def get_map_objects(self):
         return self.map_objects
