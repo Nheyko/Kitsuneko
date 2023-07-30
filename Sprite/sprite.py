@@ -50,55 +50,100 @@ class Sprite(pygame.sprite.Sprite):
             Direction.UP_RIGHT: self.sprites[3],
         }
 
+    def set_collider_sprite(self):
+        surface = pygame.Surface((sprite_width * 0.625, sprite_width / 2))
+        self.set_image(surface)
+        surface.fill((255,255,255))
+        surface.set_alpha(0)
+        self.rect = self.image.get_rect()
+        self.set_collider(surface)
+
+    def move_collider(self, speed, Direction):
+
+        match Direction:
+            case Direction.UP:
+                self.set_position(self.position.x, self.position.y - speed)
+
+            case Direction.UP_LEFT:
+                self.set_position(self.position.x - speed, self.position.y - speed)
+
+            case Direction.UP_RIGHT:
+                self.set_position(self.position.x + speed, self.position.y - speed)
+
+            case Direction.DOWN:
+                self.set_position(self.position.x, self.position.y + speed)
+
+            case Direction.DOWN_LEFT:
+                self.set_position(self.position.x - speed, self.position.y + speed)
+
+            case Direction.DOWN_RIGHT:
+                self.set_position(self.position.x + speed, self.position.y + speed)
+                    
+            case Direction.LEFT:
+                self.set_position(self.position.x - speed, self.position.y)
+
+            case Direction.RIGHT:
+                self.set_position(self.position.x + speed, self.position.y)
+
+            case _:
+                pass
+
     def move(self, speed, Direction, previous_direction, change_direction = True):
 
         match Direction:
             case Direction.UP:
                 self.set_position(self.position.x, self.position.y - speed)
-                if change_direction == True:
+                if change_direction:
                     self.change_direction(self.images, Direction.UP)
+
             case Direction.UP_LEFT:
-                self.set_position(self.position.x - speed/2, self.position.y - speed)
+                self.set_position(self.position.x - speed, self.position.y - speed)
                 if previous_direction == Direction.LEFT:
                     self.change_direction(self.images, Direction.LEFT)
                 else:
                     self.change_direction(self.images, Direction.UP)
+
             case Direction.UP_RIGHT:
-                self.set_position(self.position.x + speed/2, self.position.y - speed)
+                self.set_position(self.position.x + speed, self.position.y - speed)
                 if previous_direction == Direction.RIGHT:
                     self.change_direction(self.images, Direction.RIGHT)
                 else:
                     self.change_direction(self.images, Direction.UP)
+
             case Direction.DOWN:
                 self.set_position(self.position.x, self.position.y + speed)
-                if change_direction == True:
+                if change_direction:
                     self.change_direction(self.images, Direction.DOWN)
+
             case Direction.DOWN_LEFT:
-                self.set_position(self.position.x - speed/2, self.position.y + speed)
+                self.set_position(self.position.x - speed, self.position.y + speed)
                 if previous_direction == Direction.LEFT:
                     self.change_direction(self.images, Direction.LEFT)
                 else:
                     self.change_direction(self.images, Direction.DOWN)
+
             case Direction.DOWN_RIGHT:
-                self.set_position(self.position.x + speed/2, self.position.y + speed)
+                self.set_position(self.position.x + speed, self.position.y + speed)
                 if previous_direction == Direction.RIGHT:
                     self.change_direction(self.images, Direction.RIGHT)
                 else:
                     self.change_direction(self.images, Direction.DOWN)
+                    
             case Direction.LEFT:
                 self.set_position(self.position.x - speed, self.position.y)
-                if change_direction == True :
+                if change_direction:
                     self.change_direction(self.images, Direction.LEFT)
+
             case Direction.RIGHT:
                 self.set_position(self.position.x + speed, self.position.y)
-                if change_direction == True:
+                if change_direction:
                     self.change_direction(self.images, Direction.RIGHT)
             case _:
                 pass
 
     def update_position(self):
         self.rect.topleft = self.position.get_coordinate()
-
+    
     def change_direction(self, images, Direction):
         image = self.animator.change_direction(images, Direction)
         image.set_colorkey([0,0,0])
@@ -106,22 +151,7 @@ class Sprite(pygame.sprite.Sprite):
         self.set_image(image)
         self.set_direction(Direction)
         self.collider.set_mask(self.image)
-
-    def count_self_pixels(self, img):
-        by_color = defaultdict(int)
-
-        number_of_pixel = 0
-        lines_of_pixel = []
-        number_of_pixel = 0
-
-        for pixel in img.getdata():
-            for _ in range(32):
-                by_color[pixel] += 1
-                if(pixel != (0,0,0,0)):
-                    pass
-
-        return number_of_pixel
-
+    
     def is_void(self, img):
 
         by_color = defaultdict(int)
@@ -216,3 +246,9 @@ class Sprite(pygame.sprite.Sprite):
 
     def get_images(self):
         return self.images
+    
+    def get_sprite_width(self):
+        return sprite_width
+    
+    def get_sprite_height(self):
+        return sprite_height

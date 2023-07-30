@@ -11,23 +11,23 @@ class Keyboard:
 
     def direction_of(self, key_pressed):
             
-            if key_pressed == 0:
+            if key_pressed == 'none':
                 return Direction.NONE
-            if key_pressed == 1:
+            if key_pressed == 'up':
                 return Direction.UP
-            if key_pressed == 2:
+            if key_pressed == 'down':
                 return Direction.DOWN
-            if key_pressed == 3:
+            if key_pressed == 'left':
                 return Direction.LEFT
-            if key_pressed == 4:
+            if key_pressed == 'right':
                 return Direction.RIGHT
-            if key_pressed == 5:
+            if key_pressed == 'up_left':
                 return Direction.UP_LEFT
-            if key_pressed == 6:
+            if key_pressed == 'up_right':
                 return Direction.UP_RIGHT
-            if key_pressed == 7:
+            if key_pressed == 'down_left':
                 return Direction.DOWN_LEFT
-            if key_pressed == 8:
+            if key_pressed == 'down_right':
                 return Direction.DOWN_RIGHT
 
     def key_pressed(self):
@@ -36,27 +36,27 @@ class Keyboard:
             
         if pressed[pygame.K_UP]:
             if pressed[pygame.K_LEFT]:
-                return 5
+                return 'up_left'
             elif pressed[pygame.K_RIGHT]:
-                return 6
+                return 'up_right'
             elif pressed[pygame.K_DOWN]:
-                return 0
-            return 1
+                return 'none'
+            return 'up'
         
         elif pressed[pygame.K_DOWN]:
             if pressed[pygame.K_LEFT]:
-                return 7
+                return 'down_left'
             elif pressed[pygame.K_RIGHT]:
-                return 8
-            return 2
+                return 'down_right'
+            return 'down'
 
         elif pressed[pygame.K_LEFT]:
             if pressed[pygame.K_RIGHT]:
-                return 0
-            return 3
+                return 'none'
+            return 'left'
 
         elif pressed[pygame.K_RIGHT]:
-            return 4
+            return 'right'
         
     def is_direction_key_pressed(self):
 

@@ -5,10 +5,14 @@ class Character(Entity):
 
     def __init__(self):
         super().__init__()
+
         url = 'Assets/Sprites/Characters/player.png'
         self.sprite = Sprite()
         self.sprite.set_character_sprite(url)
+
         self.collider_sprite = Sprite()
+        self.collider_sprite.set_collider_sprite()
+
         self.move_speed = 3
 
     def get_sprite(self):

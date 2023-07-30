@@ -12,7 +12,7 @@ class Map:
         self.map = pyscroll.PyscrollGroup(map_layer=self.map_layer, default_layer=3)
         self.debug_layer = False
         self.map_objects = []
-        # self.map_layer.zoom = 2
+        self.map_layer.zoom = 1
 
     def add_sprites(self, sprites):
         for sprite in sprites:
@@ -63,3 +63,16 @@ class Map:
 
     def get_map_objects(self):
         return self.map_objects
+    
+    def get_map_layer_zoom(self):
+        return self.map_layer.zoom
+    
+    def set_map_layer_zoom(self, screen):
+
+        if screen.get_screen_width() == 800 and screen.get_screen_height() == 600:
+            self.map_layer.zoom = 1.2
+        elif screen.get_screen_width() == 1024 and screen.get_screen_height() == 768:
+            self.map_layer.zoom = 1.5
+        if screen.get_screen_width() == 1600 and screen.get_screen_height() == 900:
+            self.map_layer.zoom = 1.8
+            
