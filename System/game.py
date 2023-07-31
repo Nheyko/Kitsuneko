@@ -84,13 +84,11 @@ class Game:
 
         # Définit la position du joueur sur la carte | Position rect.topleft
         self.character.get_sprite().set_position(character_position.x, character_position.y)
-        self.character.get_collider_sprite().set_position(character_position.x + ((self.character.get_sprite().get_sprite_width() - self.character.get_sprite().get_sprite_width() * 0.625) / 2), character_position.y + (self.character.get_sprite().get_sprite_height() / 2))
+        self.character.get_collider_sprite().set_position(character_position.x + ((self.character.get_sprite().get_sprite_width() - self.character.get_sprite().get_sprite_width() * 0.5) / 2), character_position.y + (self.character.get_sprite().get_sprite_height() / 2))
 
         # Synchronise la position du rect avec la position du joueur pour éviter d'éventuel bugs
         self.character.get_sprite().update_position()
         self.character.get_collider_sprite().update_position()
-
-        print(self.character.get_collider_sprite().get_rect())
 
     # Debug function
     def show_coordinate(self):
@@ -127,6 +125,7 @@ class Game:
                     # Permet de contourner les coins pour pas se retrouver coincer dedans
                     # Coin Haut Droite
                     if self.collision.check_collision(self.character, self.polygons, Direction.UP_RIGHT) == True and self.collision.check_collision(self.character, self.polygons, Direction.UP_LEFT, 15) == False:
+                        
                         if self.keyboard_input.direction_of(self.keyboard_input.key_pressed()) == Direction.UP:
                             self.character.get_sprite().move(self.character.get_move_speed(), Direction.LEFT, self.character.get_sprite().get_direction(), False)
                             self.character.get_collider_sprite().move_collider(self.character.get_move_speed(), Direction.LEFT)
@@ -201,10 +200,10 @@ class Game:
                     # # Permet de contourner les coins pour pas se retrouver coincer dedans
                     # # Coin Bas Droite
                     if self.collision.check_collision(self.character, self.polygons, Direction.DOWN_LEFT) == True and self.collision.check_collision(self.character, self.polygons, Direction.DOWN_RIGHT, 15) == False:
-
-                        if self.keyboard_input.direction_of(self.keyboard_input.key_pressed()) == Direction.DOWN:
-                            self.character.get_sprite().move(self.character.get_move_speed(), Direction.RIGHT, self.character.get_sprite().get_direction(), False)
-                            self.character.get_collider_sprite().move_collider(self.character.get_move_speed(), Direction.RIGHT)
+                    
+                            if self.keyboard_input.direction_of(self.keyboard_input.key_pressed()) == Direction.DOWN:
+                                self.character.get_sprite().move(self.character.get_move_speed(), Direction.RIGHT, self.character.get_sprite().get_direction(), False)
+                                self.character.get_collider_sprite().move_collider(self.character.get_move_speed(), Direction.RIGHT)
 
                     # Permet de slide contre le mur tout en conservant sa direction
                     if self.keyboard_input.direction_of(self.keyboard_input.key_pressed()) == Direction.DOWN_LEFT:

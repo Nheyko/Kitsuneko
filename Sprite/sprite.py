@@ -51,7 +51,7 @@ class Sprite(pygame.sprite.Sprite):
         }
 
     def set_collider_sprite(self):
-        surface = pygame.Surface((sprite_width * 0.625, sprite_width / 2))
+        surface = pygame.Surface((sprite_width * 0.5, sprite_width / 2))
         self.set_image(surface)
         surface.fill((255,255,255))
         surface.set_alpha(0)
@@ -252,3 +252,6 @@ class Sprite(pygame.sprite.Sprite):
     
     def get_sprite_height(self):
         return sprite_height
+    
+    def save_position(self):
+        return self.position.copy()
