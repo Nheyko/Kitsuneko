@@ -12,38 +12,40 @@ class Collision:
             if 'collision' in obj.properties.keys():
                 if obj.properties['collision'] == True:
                     self.collider_objects.append(obj)
-        print(self.collider_objects)
     
     # def check_collision(self, character, colliders, direction, map):
-    def check_collision(self, character, colliders, direction, check_pixels = 0):
+    def check_collision(self, character, colliders, direction, check_pixels_x = 0, check_pixels_y = 0):
 
-        if check_pixels == 0:
-            check_pixels = character.get_move_speed()
+        if check_pixels_x == 0:
+            check_pixels_x = character.get_move_speed()
+
+        if check_pixels_y == 0:
+            check_pixels_y = character.get_move_speed()
 
         for collider in colliders:
             if direction == Direction.UP:
-                if collider.get_sprite().get_collider().overlap(character.get_collider_sprite().get_collider(), (character.get_collider_sprite().get_position().x - collider.get_sprite().get_position().x, (character.get_collider_sprite().get_position().y - check_pixels) - collider.get_sprite().get_position().y)):
+                if collider.get_sprite().get_collider().overlap(character.get_collider_sprite().get_collider(), (character.get_collider_sprite().get_position().x - collider.get_sprite().get_position().x, (character.get_collider_sprite().get_position().y - check_pixels_y) - collider.get_sprite().get_position().y)):
                     return True
             if direction == Direction.UP_LEFT:
-                if collider.get_sprite().get_collider().overlap(character.get_collider_sprite().get_collider(), ((character.get_collider_sprite().get_position().x - check_pixels) - collider.get_sprite().get_position().x, (character.get_collider_sprite().get_position().y - check_pixels) - collider.get_sprite().get_position().y)):
+                if collider.get_sprite().get_collider().overlap(character.get_collider_sprite().get_collider(), ((character.get_collider_sprite().get_position().x - check_pixels_x) - collider.get_sprite().get_position().x, (character.get_collider_sprite().get_position().y - check_pixels_y) - collider.get_sprite().get_position().y)):
                     return True
             if direction == Direction.UP_RIGHT:
-                if collider.get_sprite().get_collider().overlap(character.get_collider_sprite().get_collider(), ((character.get_collider_sprite().get_position().x + check_pixels) - collider.get_sprite().get_position().x, (character.get_collider_sprite().get_position().y - check_pixels) - collider.get_sprite().get_position().y)):
+                if collider.get_sprite().get_collider().overlap(character.get_collider_sprite().get_collider(), ((character.get_collider_sprite().get_position().x + check_pixels_x) - collider.get_sprite().get_position().x, (character.get_collider_sprite().get_position().y - check_pixels_y) - collider.get_sprite().get_position().y)):
                     return True
             if direction == Direction.DOWN:
-                if collider.get_sprite().get_collider().overlap(character.get_collider_sprite().get_collider(), (character.get_collider_sprite().get_position().x - collider.get_sprite().get_position().x, (character.get_collider_sprite().get_position().y + check_pixels) - collider.get_sprite().get_position().y)):
+                if collider.get_sprite().get_collider().overlap(character.get_collider_sprite().get_collider(), (character.get_collider_sprite().get_position().x - collider.get_sprite().get_position().x, (character.get_collider_sprite().get_position().y + check_pixels_y) - collider.get_sprite().get_position().y)):
                     return True
             if direction == Direction.DOWN_LEFT:
-                if collider.get_sprite().get_collider().overlap(character.get_collider_sprite().get_collider(), ((character.get_collider_sprite().get_position().x - check_pixels) - collider.get_sprite().get_position().x, (character.get_collider_sprite().get_position().y + check_pixels) - collider.get_sprite().get_position().y)):
+                if collider.get_sprite().get_collider().overlap(character.get_collider_sprite().get_collider(), ((character.get_collider_sprite().get_position().x - check_pixels_x) - collider.get_sprite().get_position().x, (character.get_collider_sprite().get_position().y + check_pixels_y) - collider.get_sprite().get_position().y)):
                     return True
             if direction == Direction.DOWN_RIGHT:
-                if collider.get_sprite().get_collider().overlap(character.get_collider_sprite().get_collider(), ((character.get_collider_sprite().get_position().x + check_pixels) - collider.get_sprite().get_position().x, (character.get_collider_sprite().get_position().y + check_pixels) - collider.get_sprite().get_position().y)):
+                if collider.get_sprite().get_collider().overlap(character.get_collider_sprite().get_collider(), ((character.get_collider_sprite().get_position().x + check_pixels_x) - collider.get_sprite().get_position().x, (character.get_collider_sprite().get_position().y + check_pixels_y) - collider.get_sprite().get_position().y)):
                     return True
             if direction == Direction.LEFT:
-                if collider.get_sprite().get_collider().overlap(character.get_collider_sprite().get_collider(), ((character.get_collider_sprite().get_position().x - check_pixels) - collider.get_sprite().get_position().x, (character.get_collider_sprite().get_position().y - collider.get_sprite().get_position().y))):
+                if collider.get_sprite().get_collider().overlap(character.get_collider_sprite().get_collider(), ((character.get_collider_sprite().get_position().x - check_pixels_x) - collider.get_sprite().get_position().x, (character.get_collider_sprite().get_position().y - collider.get_sprite().get_position().y))):
                     return True
             if direction == Direction.RIGHT:
-                if collider.get_sprite().get_collider().overlap(character.get_collider_sprite().get_collider(), ((character.get_collider_sprite().get_position().x + check_pixels) - collider.get_sprite().get_position().x, (character.get_collider_sprite().get_position().y - collider.get_sprite().get_position().y))):
+                if collider.get_sprite().get_collider().overlap(character.get_collider_sprite().get_collider(), ((character.get_collider_sprite().get_position().x + check_pixels_x) - collider.get_sprite().get_position().x, (character.get_collider_sprite().get_position().y - collider.get_sprite().get_position().y))):
                     return True
         return False
 
