@@ -11,11 +11,11 @@ class Polygon():
     def create_polygon(self, polygon_object):
             surface = pygame.Surface((polygon_object.width, polygon_object.height), pygame.SRCALPHA)
             self.set_points([(point.x - polygon_object.x, point.y - polygon_object.y) for point in polygon_object.points])
-            pygame.draw.polygon(surface, 'blue', self.points)
-            self.sprite.set_rect(polygon_object.x, polygon_object.y, polygon_object.width, polygon_object.height)
+            pygame.draw.polygon(surface, 'black', self.points)
             self.sprite.set_image(surface)
             self.sprite.set_position(polygon_object.x, polygon_object.y)
-            self.sprite.set_name(polygon_object.type)
+            self.sprite.set_name(polygon_object.name)
+            self.sprite.set_type(polygon_object.type)
             self.sprite.set_collider(surface)
 
     def get_sprite(self):

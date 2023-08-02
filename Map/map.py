@@ -9,7 +9,7 @@ class Map:
         self.tmx_data = pytmx.util_pygame.load_pygame('Assets/Maps/Starting village.tmx')
         map_data = pyscroll.data.TiledMapData(self.tmx_data)
         self.map_layer = pyscroll.orthographic.BufferedRenderer(map_data, window.get_screen().get_size())
-        self.map = pyscroll.PyscrollGroup(map_layer=self.map_layer, default_layer=3)
+        self.map = pyscroll.PyscrollGroup(map_layer=self.map_layer, default_layer=4)
         self.debug_layer = False
         self.map_objects = []
         self.map_layer.zoom = 1
@@ -39,10 +39,10 @@ class Map:
     def get_map(self):
         return self.map
     
-    def width(self):
+    def get_width(self):
         return self.tmx_data.width * self.tmx_data.tilewidth
     
-    def height(self):
+    def get_height(self):
         return self.tmx_data.height * self.tmx_data.tileheight
     
     def get_tmx_data(self):
@@ -75,4 +75,4 @@ class Map:
             self.map_layer.zoom = 1.5
         if screen.get_screen_width() == 1600 and screen.get_screen_height() == 900:
             self.map_layer.zoom = 1.8
-            
+    

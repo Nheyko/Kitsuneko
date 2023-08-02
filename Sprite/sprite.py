@@ -18,6 +18,7 @@ class Sprite(pygame.sprite.Sprite):
         super().__init__()
 
         self.name = ""
+        self.type = ""
 
         self.animator = Animation()
         self.collider = Collider()
@@ -252,6 +253,10 @@ class Sprite(pygame.sprite.Sprite):
     
     def get_sprite_height(self):
         return sprite_height
+
+    def get_type(self):
+        return self.type
     
-    def save_position(self):
-        return self.position.copy()
+    def set_type(self, type):
+        self.type = type
+    
