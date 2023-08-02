@@ -2,9 +2,9 @@ import pygame
 
 from Collision.collision import Collision
 from Controls.keyboard import Keyboard
-from Map.rectangle import Rectangle
+from Sprite.rectangle import Rectangle
 from Screen.window import Window
-from Map.polygon import Polygon
+from Sprite.polygon import Polygon
 from Sound.music import Music
 from Sprite.direction import Direction
 from Sprite.sprite import Sprite
@@ -66,12 +66,10 @@ class Game:
         # Ajout de tous mes objets qui possede des collisions et un sprite dans mon groupe d'objet
         for collider_object in self.collider_objects:
             if collider_object.type == 'polygon':
-                polygon = Polygon()
-                polygon.create_polygon(collider_object)
+                polygon = Polygon(collider_object)
                 self.colliders.append(polygon)
             elif collider_object.type == 'rectangle':
-                rectangle = Rectangle()
-                rectangle.create_rectangle(collider_object)
+                rectangle = Rectangle(collider_object)
                 self.colliders.append(rectangle)
 
         # Converti la surface en Sprite pour pouvoir afficher les colliders

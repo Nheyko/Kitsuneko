@@ -2,12 +2,11 @@ import pygame
 
 from Sprite.sprite import Sprite
 
-class Rectangle:
+class Rectangle():
 
-    def __init__(self) -> None:
+    def __init__(self, rectangle_object) -> None:
         self.sprite = Sprite()
 
-    def create_rectangle(self, rectangle_object):
         surface = pygame.Surface((rectangle_object.width, rectangle_object.height))
         self.sprite.set_rect(rectangle_object.x, rectangle_object.y, rectangle_object.width, rectangle_object.height)
         pygame.draw.rect(surface, 'black', self.sprite.get_rect())
