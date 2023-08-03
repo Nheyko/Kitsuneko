@@ -89,3 +89,293 @@ class Collision:
     
     def get_collider_objects(self):
         return self.collider_objects
+    
+    def motor(self, keyboard_input, character, colliders, map):
+
+        if pygame.key.get_pressed():
+            if keyboard_input.is_direction_key_pressed():
+
+                isCollision = self.check_collision(character, colliders, keyboard_input.direction_of(keyboard_input.key_pressed()))
+                if isCollision == False:
+                    character.get_sprite().move(character.get_move_speed(), keyboard_input.direction_of(keyboard_input.key_pressed()), character.get_sprite().get_direction())
+                    character.get_collider_sprite().move_collider(character.get_move_speed(), keyboard_input.direction_of(keyboard_input.key_pressed()))
+
+                elif isCollision == True and character.get_sprite().get_direction() == Direction.UP:
+
+                    # Change de direction si on est contre un mur et qu'on relache une touche
+                    if self.check_collision(character, colliders, Direction.LEFT) and keyboard_input.key_pressed() == 'left':
+                        character.get_sprite().change_direction(character.get_sprite().get_images(), Direction.LEFT)
+
+                    elif self.check_collision(character, colliders, Direction.RIGHT) and keyboard_input.key_pressed() == 'right':
+                        character.get_sprite().change_direction(character.get_sprite().get_images(), Direction.RIGHT)
+
+                    # Permet de contourner les coins pour pas se retrouver coincer dedans
+                    # Coin Haut Droite
+                    if self.check_collision(character, colliders, Direction.UP_RIGHT) == True\
+                        and self.check_collision(character, colliders, Direction.UP_LEFT, map.get_tmx_data().tilewidth, map.get_tmx_data().tileheight) == False\
+                        and self.get_is_polygon() == True:
+                        
+                        if keyboard_input.direction_of(keyboard_input.key_pressed()) == Direction.UP:
+                            character.get_sprite().move(character.get_move_speed(), Direction.LEFT, character.get_sprite().get_direction(), False)
+                            character.get_collider_sprite().move_collider(character.get_move_speed(), Direction.LEFT)
+                    
+                    # # Permet de contourner les coins pour pas se retrouver coincer dedans
+                    # # Coin Haut Gauche
+                    if self.check_collision(character, colliders, Direction.UP_LEFT) == True\
+                        and self.check_collision(character, colliders, Direction.UP_RIGHT, map.get_tmx_data().tilewidth, map.get_tmx_data().tileheight) == False\
+                            and self.get_is_polygon() == True:
+
+                        if keyboard_input.direction_of(keyboard_input.key_pressed()) == Direction.UP:
+                            character.get_sprite().move(character.get_move_speed(), Direction.RIGHT, character.get_sprite().get_direction(), False)
+                            character.get_collider_sprite().move_collider(character.get_move_speed(), Direction.RIGHT)
+                    
+                    # Permet de slide contre le mur tout en conservant sa direction
+                    if keyboard_input.direction_of(keyboard_input.key_pressed()) == Direction.UP_LEFT:
+                        
+                        if self.check_collision(character, colliders, Direction.UP) == False:
+                            character.get_sprite().move(character.get_move_speed(), Direction.UP, character.get_sprite().get_direction(), False)
+                            character.get_collider_sprite().move_collider(character.get_move_speed(), Direction.UP)
+
+                        elif self.check_collision(character, colliders, Direction.LEFT) == False:
+                            character.get_sprite().move(character.get_move_speed(), Direction.LEFT, character.get_sprite().get_direction(), False)
+                            character.get_collider_sprite().move_collider(character.get_move_speed(), Direction.LEFT)
+                            
+                    elif(keyboard_input.direction_of(keyboard_input.key_pressed()) == Direction.UP_RIGHT):
+
+                        if self.check_collision(character, colliders, Direction.UP) == False:
+                            character.get_sprite().move(character.get_move_speed(), Direction.UP, character.get_sprite().get_direction(), False)
+                            character.get_collider_sprite().move_collider(character.get_move_speed(), Direction.UP)
+
+                        elif self.check_collision(character, colliders, Direction.RIGHT) == False:
+                            character.get_sprite().move(character.get_move_speed(), Direction.RIGHT, character.get_sprite().get_direction(), False)
+                            character.get_collider_sprite().move_collider(character.get_move_speed(), Direction.RIGHT)
+
+                    elif(keyboard_input.direction_of(keyboard_input.key_pressed()) == Direction.DOWN_LEFT):
+                        
+                        if self.check_collision(character, colliders, Direction.DOWN) == False:
+                            character.get_sprite().move(character.get_move_speed(), Direction.DOWN, character.get_sprite().get_direction())
+                            character.get_collider_sprite().move_collider(character.get_move_speed(), Direction.DOWN)
+
+                        elif self.check_collision(character, colliders, Direction.LEFT) == False:
+                            character.get_sprite().move(character.get_move_speed(), Direction.LEFT, character.get_sprite().get_direction())
+                            character.get_collider_sprite().move_collider(character.get_move_speed(), Direction.LEFT)
+
+                    elif(keyboard_input.direction_of(keyboard_input.key_pressed()) == Direction.DOWN_RIGHT):
+                        
+                        if self.check_collision(character, colliders, Direction.DOWN) == False:
+                            character.get_sprite().move(character.get_move_speed(), Direction.DOWN, character.get_sprite().get_direction())
+                            character.get_collider_sprite().move_collider(character.get_move_speed(), Direction.DOWN)
+
+                        elif self.check_collision(character, colliders, Direction.RIGHT) == False:
+                            character.get_sprite().move(character.get_move_speed(), Direction.RIGHT, character.get_sprite().get_direction())
+                            character.get_collider_sprite().move_collider(character.get_move_speed(), Direction.RIGHT)
+
+                elif isCollision == True and character.get_sprite().get_direction() == Direction.DOWN:
+                    
+                    # Change de direction si on est contre un mur et qu'on relache une touche
+                    if self.check_collision(character, colliders, Direction.LEFT) and keyboard_input.key_pressed() == 'left':
+                        character.get_sprite().change_direction(character.get_sprite().get_images(), Direction.LEFT)
+
+                    elif self.check_collision(character, colliders, Direction.RIGHT) and keyboard_input.key_pressed() == 'right':
+                        character.get_sprite().change_direction(character.get_sprite().get_images(), Direction.RIGHT)
+
+                    # Permet de contourner les coins pour pas se retrouver coincer dedans
+                    # Coin Bas Gauche
+                    if self.check_collision(character, colliders, Direction.DOWN_RIGHT) == True\
+                        and self.check_collision(character, colliders, Direction.DOWN_LEFT,\
+                        map.get_tmx_data().tilewidth, map.get_tmx_data().tileheight) == False\
+                        and self.get_is_polygon() == True:
+
+                        if keyboard_input.direction_of(keyboard_input.key_pressed()) == Direction.DOWN:
+                            character.get_sprite().move(character.get_move_speed(), Direction.LEFT, character.get_sprite().get_direction(), False)
+                            character.get_collider_sprite().move_collider(character.get_move_speed(), Direction.LEFT)
+
+                    # # Permet de contourner les coins pour pas se retrouver coincer dedans
+                    # # Coin Bas Droite
+                    if self.check_collision(character, colliders, Direction.DOWN_LEFT) == True\
+                        and self.check_collision(character, colliders, Direction.DOWN_RIGHT, map.get_tmx_data().tilewidth, map.get_tmx_data().tileheight) == False\
+                        and self.get_is_polygon() == True:
+
+                        if keyboard_input.direction_of(keyboard_input.key_pressed()) == Direction.DOWN:
+                            character.get_sprite().move(character.get_move_speed(), Direction.RIGHT, character.get_sprite().get_direction(), False)
+                            character.get_collider_sprite().move_collider(character.get_move_speed(), Direction.RIGHT)
+
+                    # Permet de slide contre le mur tout en conservant sa direction
+                    if keyboard_input.direction_of(keyboard_input.key_pressed()) == Direction.DOWN_LEFT:
+
+                        if self.check_collision(character, colliders, Direction.DOWN) == False:
+                            character.get_sprite().move(character.get_move_speed(), Direction.DOWN, character.get_sprite().get_direction(), False)
+                            character.get_collider_sprite().move_collider(character.get_move_speed(), Direction.DOWN)
+
+                        elif self.check_collision(character, colliders, Direction.LEFT) == False:
+                            character.get_sprite().move(character.get_move_speed(), Direction.LEFT, character.get_sprite().get_direction(), False)
+                            character.get_collider_sprite().move_collider(character.get_move_speed(), Direction.LEFT)
+
+                    elif keyboard_input.direction_of(keyboard_input.key_pressed()) == Direction.DOWN_RIGHT:
+
+                        if self.check_collision(character, colliders, Direction.DOWN) == False:
+                            character.get_sprite().move(character.get_move_speed(), Direction.DOWN, character.get_sprite().get_direction(), False)
+                            character.get_collider_sprite().move_collider(character.get_move_speed(), Direction.DOWN)
+
+                        elif self.check_collision(character, colliders, Direction.RIGHT) == False:
+                            character.get_sprite().move(character.get_move_speed(), Direction.RIGHT, character.get_sprite().get_direction(), False)
+                            character.get_collider_sprite().move_collider(character.get_move_speed(), Direction.RIGHT)
+
+                    elif keyboard_input.direction_of(keyboard_input.key_pressed()) == Direction.UP_LEFT:
+
+                        if self.check_collision(character, colliders, Direction.UP) == False:
+                            character.get_sprite().move(character.get_move_speed(), Direction.UP, character.get_sprite().get_direction())
+                            character.get_collider_sprite().move_collider(character.get_move_speed(), Direction.UP)
+
+                        elif self.check_collision(character, colliders, Direction.LEFT) == False:
+                            character.get_sprite().move(character.get_move_speed(), Direction.LEFT, character.get_sprite().get_direction())
+                            character.get_collider_sprite().move_collider(character.get_move_speed(), Direction.LEFT)
+
+                    elif keyboard_input.direction_of(keyboard_input.key_pressed()) == Direction.UP_RIGHT:
+
+                        if self.check_collision(character, colliders, Direction.UP) == False:
+                            character.get_sprite().move(character.get_move_speed(), Direction.UP, character.get_sprite().get_direction())
+                            character.get_collider_sprite().move_collider(character.get_move_speed(), Direction.UP)
+
+                        elif self.check_collision(character, colliders, Direction.RIGHT) == False:
+                            character.get_sprite().move(character.get_move_speed(), Direction.RIGHT, character.get_sprite().get_direction())
+                            character.get_collider_sprite().move_collider(character.get_move_speed(), Direction.RIGHT)
+
+                elif isCollision == True and character.get_sprite().get_direction() == Direction.LEFT:
+
+                    if self.check_collision(character, colliders, Direction.UP) and keyboard_input.key_pressed() == 'up':
+                        character.get_sprite().change_direction(character.get_sprite().get_images(), Direction.UP)
+
+                    elif self.check_collision(character, colliders, Direction.DOWN) == True and keyboard_input.key_pressed() == 'down':
+                        character.get_sprite().change_direction(character.get_sprite().get_images(), Direction.DOWN)
+
+                    # Permet de contourner les coins pour pas se retrouver coincer dedans
+                    # Coin Bas Gauche
+                    if self.check_collision(character, colliders, Direction.UP_LEFT) == True\
+                    and self.check_collision(character, colliders, Direction.DOWN_LEFT, map.get_tmx_data().tilewidth, map.get_tmx_data().tileheight) == False\
+                    and self.get_is_polygon() == True:
+
+                        if keyboard_input.direction_of(keyboard_input.key_pressed()) == Direction.LEFT:
+                            character.get_sprite().move(character.get_move_speed(), Direction.DOWN, character.get_sprite().get_direction(), False)
+                            character.get_collider_sprite().move_collider(character.get_move_speed(), Direction.DOWN)
+
+                    # # Permet de contourner les coins pour pas se retrouver coincer dedans
+                    # # Coin Haut Gauche
+                    if self.check_collision(character, colliders, Direction.DOWN_LEFT) == True\
+                    and self.check_collision(character, colliders, Direction.UP_LEFT, map.get_tmx_data().tilewidth, map.get_tmx_data().tileheight) == False\
+                    and self.get_is_polygon() == True:
+
+                        if keyboard_input.direction_of(keyboard_input.key_pressed()) == Direction.LEFT:
+                            character.get_sprite().move(character.get_move_speed(), Direction.UP, character.get_sprite().get_direction(), False)
+                            character.get_collider_sprite().move_collider(character.get_move_speed(), Direction.UP)
+
+                    if keyboard_input.direction_of(keyboard_input.key_pressed()) == Direction.UP_LEFT:
+
+                        if self.check_collision(character, colliders, Direction.UP) == False:
+                            character.get_sprite().move(character.get_move_speed(), Direction.UP, character.get_sprite().get_direction(), False)
+                            character.get_collider_sprite().move_collider(character.get_move_speed(), Direction.UP)
+
+                        elif self.check_collision(character, colliders, Direction.LEFT) == False:
+                            character.get_sprite().move(character.get_move_speed(), Direction.LEFT, character.get_sprite().get_direction(), False)
+                            character.get_collider_sprite().move_collider(character.get_move_speed(), Direction.LEFT)
+
+                    elif(keyboard_input.direction_of(keyboard_input.key_pressed()) == Direction.DOWN_LEFT):
+
+                        if self.check_collision(character, colliders, Direction.DOWN) == False:
+                            character.get_sprite().move(character.get_move_speed(), Direction.DOWN, character.get_sprite().get_direction(), False)
+                            character.get_collider_sprite().move_collider(character.get_move_speed(), Direction.DOWN)
+
+                        elif self.check_collision(character, colliders, Direction.LEFT) == False:
+                            character.get_sprite().move(character.get_move_speed(), Direction.LEFT, character.get_sprite().get_direction(), False)
+                            character.get_collider_sprite().move_collider(character.get_move_speed(), Direction.LEFT)
+
+                    elif(keyboard_input.direction_of(keyboard_input.key_pressed()) == Direction.UP_RIGHT):
+
+                        if self.check_collision(character, colliders, Direction.UP) == False:
+                            character.get_sprite().move(character.get_move_speed(), Direction.UP, character.get_sprite().get_direction())
+                            character.get_collider_sprite().move_collider(character.get_move_speed(), Direction.UP)
+
+                        elif self.check_collision(character, colliders, Direction.RIGHT) == False:
+                            character.get_sprite().move(character.get_move_speed(), Direction.RIGHT, character.get_sprite().get_direction())
+                            character.get_collider_sprite().move_collider(character.get_move_speed(), Direction.RIGHT)
+
+                    elif(keyboard_input.direction_of(keyboard_input.key_pressed()) == Direction.DOWN_RIGHT):
+
+                        if self.check_collision(character, colliders, Direction.DOWN) == False:
+                            character.get_sprite().move(character.get_move_speed(), Direction.DOWN, character.get_sprite().get_direction())
+                            character.get_collider_sprite().move_collider(character.get_move_speed(), Direction.DOWN)
+
+                        elif self.check_collision(character, colliders, Direction.RIGHT) == False:
+                            character.get_sprite().move(character.get_move_speed(), Direction.RIGHT, character.get_sprite().get_direction())
+                            character.get_collider_sprite().move_collider(character.get_move_speed(), Direction.RIGHT)
+
+                elif isCollision == True and character.get_sprite().get_direction() == Direction.RIGHT:
+
+                    if self.check_collision(character, colliders, Direction.UP) and keyboard_input.key_pressed() == 'up':
+                        character.get_sprite().change_direction(character.get_sprite().get_images(), Direction.UP)
+
+                    elif self.check_collision(character, colliders, Direction.DOWN) and keyboard_input.key_pressed() == 'down':
+                        character.get_sprite().change_direction(character.get_sprite().get_images(), Direction.DOWN)
+
+                    # Permet de contourner les coins pour pas se retrouver coincer dedans
+                    # Coin Haut Droite
+                    if self.check_collision(character, colliders, Direction.DOWN_RIGHT) == True\
+                    and self.check_collision(character, colliders, Direction.UP_RIGHT, map.get_tmx_data().tilewidth, map.get_tmx_data().tileheight) == False\
+                    and self.get_is_polygon() == True:
+
+                        if keyboard_input.direction_of(keyboard_input.key_pressed()) == Direction.RIGHT:
+                            character.get_sprite().move(character.get_move_speed(), Direction.UP, character.get_sprite().get_direction(), False)
+                            character.get_collider_sprite().move_collider(character.get_move_speed(), Direction.UP)
+
+                    # # Permet de contourner les coins pour pas se retrouver coincer dedans
+                    # # Coin Bas Droite
+                    if self.check_collision(character, colliders, Direction.UP_RIGHT) == True\
+                    and self.check_collision(character, colliders, Direction.DOWN_RIGHT, map.get_tmx_data().tilewidth, map.get_tmx_data().tileheight) == False\
+                    and self.get_is_polygon() == True:
+
+                        if keyboard_input.direction_of(keyboard_input.key_pressed()) == Direction.RIGHT:
+                            character.get_sprite().move(character.get_move_speed(), Direction.DOWN, character.get_sprite().get_direction(), False)
+                            character.get_collider_sprite().move_collider(character.get_move_speed(), Direction.DOWN)
+
+                    if keyboard_input.direction_of(keyboard_input.key_pressed()) == Direction.UP_RIGHT:
+
+                        if self.check_collision(character, colliders, Direction.UP)  == False:
+                            character.get_sprite().move(character.get_move_speed(), Direction.UP, character.get_sprite().get_direction(), False)
+                            character.get_collider_sprite().move_collider(character.get_move_speed(), Direction.UP)
+
+                        elif self.check_collision(character, colliders, Direction.RIGHT)  == False:
+                            character.get_sprite().move(character.get_move_speed(), Direction.RIGHT, character.get_sprite().get_direction(), False)
+                            character.get_collider_sprite().move_collider(character.get_move_speed(), Direction.RIGHT)
+
+                    elif(keyboard_input.direction_of(keyboard_input.key_pressed()) == Direction.DOWN_RIGHT):
+
+                        if self.check_collision(character, colliders, Direction.DOWN)  == False:
+                            character.get_sprite().move(character.get_move_speed(), Direction.DOWN, character.get_sprite().get_direction(), False)
+                            character.get_collider_sprite().move_collider(character.get_move_speed(), Direction.DOWN)
+
+                        elif self.check_collision(character, colliders, Direction.RIGHT)  == False:
+                            character.get_sprite().move(character.get_move_speed(), Direction.RIGHT, character.get_sprite().get_direction(), False)
+                            character.get_collider_sprite().move_collider(character.get_move_speed(), Direction.RIGHT)
+
+                    elif(keyboard_input.direction_of(keyboard_input.key_pressed()) == Direction.UP_LEFT):
+
+                        if self.check_collision(character, colliders, Direction.UP)  == False:
+                            character.get_sprite().move(character.get_move_speed(), Direction.UP, character.get_sprite().get_direction())
+                            character.get_collider_sprite().move_collider(character.get_move_speed(), Direction.UP)
+
+                        elif self.check_collision(character, colliders, Direction.LEFT)  == False:
+                            character.get_sprite().move(character.get_move_speed(), Direction.LEFT, character.get_sprite().get_direction())
+                            character.get_collider_sprite().move_collider(character.get_move_speed(), Direction.LEFT)
+
+                    elif(keyboard_input.direction_of(keyboard_input.key_pressed()) == Direction.DOWN_LEFT):
+
+                        if self.check_collision(character, colliders, Direction.DOWN)  == False:
+                            character.get_sprite().move(character.get_move_speed(), Direction.DOWN, character.get_sprite().get_direction())
+                            character.get_collider_sprite().move_collider(character.get_move_speed(),  Direction.DOWN)
+
+                        elif self.check_collision(character, colliders, Direction.LEFT)  == False:
+                            character.get_sprite().move(character.get_move_speed(), Direction.LEFT, character.get_sprite().get_direction())
+                            character.get_collider_sprite().move_collider(character.get_move_speed(), Direction.LEFT)
+
+            
+

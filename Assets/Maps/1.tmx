@@ -110,7 +110,7 @@
 </data>
  </layer>
  <objectgroup id="3" name="tp">
-  <object id="1" name="Starting village" x="384" y="768" width="32" height="32"/>
+  <object id="1" name="starting village" x="384" y="768" width="32" height="32"/>
   <object id="2" name="8" x="0" y="384" width="32" height="32"/>
   <object id="3" name="2" x="768" y="384" width="32" height="32"/>
  </objectgroup>

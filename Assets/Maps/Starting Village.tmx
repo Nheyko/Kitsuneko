@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="54">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="56">
  <tileset firstgid="1" source="nature.tsx"/>
  <tileset firstgid="721" source="house.tsx"/>
  <layer id="1" name="background" width="50" height="50">
@@ -327,100 +327,100 @@
 </data>
  </layer>
  <objectgroup id="8" name="obstacle">
-  <object id="15" name="Wall SW" type="polygon" x="0" y="416">
+  <object id="15" name="wall sw" type="polygon" x="0" y="416">
    <properties>
     <property name="collision" type="bool" value="true"/>
    </properties>
    <polygon points="0,0 32,0 32,352 384,352 384,384 0,384"/>
   </object>
-  <object id="14" name="Wall SE" type="polygon" x="416" y="416">
+  <object id="14" name="wall se" type="polygon" x="416" y="416">
    <properties>
     <property name="collision" type="bool" value="true"/>
    </properties>
    <polygon points="384,0 384,384 0,384 0,352 352,352 352,0"/>
   </object>
-  <object id="13" name="Wall NE" type="polygon" x="416" y="0">
+  <object id="13" name="wall ne" type="polygon" x="416" y="0">
    <properties>
     <property name="collision" type="bool" value="true"/>
    </properties>
    <polygon points="0,0 384,0 384,384 352,384 352,32 0,32"/>
   </object>
-  <object id="12" name="Wall NW" type="polygon" x="0" y="0">
+  <object id="12" name="wall nw" type="polygon" x="0" y="0">
    <properties>
     <property name="collision" type="bool" value="true"/>
    </properties>
    <polygon points="384,0 384,32 32,32 32,384 0,384 0,0"/>
   </object>
-  <object id="9" name="Water SW" type="polygon" x="160" y="416">
+  <object id="9" name="water sw" type="polygon" x="160" y="416">
    <properties>
     <property name="collision" type="bool" value="true"/>
    </properties>
    <polygon points="0,0 32,0 32,192 224,192 224,224 0,224"/>
   </object>
-  <object id="11" name="Water SE" type="polygon" x="416" y="416">
+  <object id="11" name="water se" type="polygon" x="416" y="416">
    <properties>
     <property name="collision" type="bool" value="true"/>
    </properties>
    <polygon points="224,0 192,0 192,192 0,192 0,224 224,224"/>
   </object>
-  <object id="10" name="Water NE" type="polygon" x="416" y="160">
+  <object id="10" name="water ne" type="polygon" x="416" y="160">
    <properties>
     <property name="collision" type="bool" value="true"/>
    </properties>
    <polygon points="0,0 224,0 224,224 192,224 192,32 0,32"/>
   </object>
-  <object id="8" name="Water NW" type="polygon" x="160" y="160">
+  <object id="8" name="water nw" type="polygon" x="160" y="160">
    <properties>
     <property name="collision" type="bool" value="true"/>
    </properties>
    <polygon points="0,0 224,0 224,32 32,32 32,224 0,224"/>
   </object>
-  <object id="44" name="North sign" type="rectangle" x="420" y="48" width="24" height="12">
+  <object id="44" name="north sign" type="rectangle" x="420" y="48" width="24" height="12">
    <properties>
     <property name="collision" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="38" name="Tree" type="rectangle" x="88" y="96" width="16" height="12">
+  <object id="38" name="tree" type="rectangle" x="88" y="96" width="16" height="12">
    <properties>
     <property name="collision" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="39" name="West sign" type="rectangle" x="36" y="368" width="24" height="12">
+  <object id="39" name="west sign" type="rectangle" x="36" y="368" width="24" height="12">
    <properties>
     <property name="collision" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="40" name="Tree" type="rectangle" x="88" y="704" width="16" height="12">
+  <object id="40" name="tree" type="rectangle" x="88" y="704" width="16" height="12">
    <properties>
     <property name="collision" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="45" name="South sign" type="rectangle" x="356" y="752" width="24" height="12">
+  <object id="45" name="south sign" type="rectangle" x="356" y="752" width="24" height="12">
    <properties>
     <property name="collision" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="41" name="Tree" type="rectangle" x="696" y="704" width="16" height="12">
+  <object id="41" name="tree" type="rectangle" x="696" y="704" width="16" height="12">
    <properties>
     <property name="collision" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="42" name="East sign" type="rectangle" x="740" y="432" width="24" height="12">
+  <object id="42" name="east sign" type="rectangle" x="740" y="432" width="24" height="12">
    <properties>
     <property name="collision" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="52" name="Home sign" type="rectangle" x="228" y="336" width="24" height="12">
+  <object id="52" name="home sign" type="rectangle" x="228" y="336" width="24" height="12">
    <properties>
     <property name="collision" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="43" name="Tree" type="rectangle" x="696" y="96" width="16" height="12">
+  <object id="43" name="tree" type="rectangle" x="696" y="96" width="16" height="12">
    <properties>
     <property name="collision" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="53" name="Home front" type="rectangle" x="250" y="272" width="80" height="70">
+  <object id="53" name="home front" type="rectangle" x="250" y="272" width="80" height="70">
    <properties>
     <property name="collision" type="bool" value="true"/>
    </properties>
@@ -437,5 +437,8 @@
   <object id="33" name="5" x="384" y="768" width="32" height="32"/>
   <object id="35" name="7" x="0" y="384" width="32" height="32"/>
   <object id="49" name="home" x="256" y="336" width="32" height="16"/>
+  <object id="55" name="home exit" x="256" y="352">
+   <point/>
+  </object>
  </objectgroup>
 </map>
