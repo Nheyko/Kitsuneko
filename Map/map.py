@@ -3,16 +3,10 @@ import pyscroll
 
 class Map:
 
-    def __init__(self, window):
+    def __init__(self, window, url, max_layer):
 
         # Chargement de la carte
-        self.tmx_data = pytmx.util_pygame.load_pygame('Assets/Maps/Starting village.tmx')
-        map_data = pyscroll.data.TiledMapData(self.tmx_data)
-        self.map_layer = pyscroll.orthographic.BufferedRenderer(map_data, window.get_screen().get_size())
-        self.map = pyscroll.PyscrollGroup(map_layer=self.map_layer, default_layer=4)
-        self.debug_layer = False
-        self.map_objects = []
-        self.map_layer.zoom = 1
+        self.load_map(window, url, max_layer)
 
     def add_sprites(self, sprites):
         for sprite in sprites:
@@ -76,3 +70,13 @@ class Map:
         if screen.get_screen_width() == 1600 and screen.get_screen_height() == 900:
             self.map_layer.zoom = 1.8
     
+    def load_map(self, window, url, max_layer):
+        # Chargement de la carte
+        self.tmx_data = pytmx.util_pygame.load_pygame(url)
+        map_data = pyscroll.data.TiledMapData(self.tmx_data)
+        self.map_layer = pyscroll.orthographic.BufferedRenderer(map_data, window.get_screen().get_size())
+        self.map = pyscroll.PyscrollGroup(map_layer=self.map_layer, default_layer=max_layer)
+        self.debug_layer = False
+        self.map_objects = []
+        self.map_layer.zoom = 1
+        

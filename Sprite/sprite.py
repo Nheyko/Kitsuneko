@@ -22,6 +22,7 @@ class Sprite(pygame.sprite.Sprite):
 
         self.animator = Animation()
         self.collider = Collider()
+        self.collider_surface = pygame.Surface((0,0))
         self.position = Coordinate()
 
         self.direction = Direction.NONE
@@ -52,12 +53,15 @@ class Sprite(pygame.sprite.Sprite):
         }
 
     def set_collider_sprite(self):
-        surface = pygame.Surface((sprite_width * 0.5, sprite_width / 2))
-        self.set_image(surface)
-        surface.fill((255,255,255))
-        surface.set_alpha(0)
+        self.collider_surface = pygame.Surface((sprite_width * 0.5, sprite_width / 2))
+        self.set_image(self.collider_surface)
+        self.collider_surface.fill((255,255,255))
+        self.collider_surface.set_alpha(0)
         self.rect = self.image.get_rect()
-        self.set_collider(surface)
+        self.set_collider(self.collider_surface)
+
+    def set_collider_surface_alpha(self, value = 0):
+        self.collider_surface.set_alpha(value)
 
     def move_collider(self, speed, Direction):
 

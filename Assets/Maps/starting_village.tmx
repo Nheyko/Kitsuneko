@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="56">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="57">
  <tileset firstgid="1" source="nature.tsx"/>
  <tileset firstgid="721" source="house.tsx"/>
  <layer id="1" name="background" width="50" height="50">
@@ -375,6 +375,12 @@
    </properties>
    <polygon points="0,0 224,0 224,32 32,32 32,224 0,224"/>
   </object>
+  <object id="56" name="home front" type="polygon" x="250" y="272">
+   <properties>
+    <property name="collision" type="bool" value="true"/>
+   </properties>
+   <polygon points="0,0 80,0 80,70 0,70"/>
+  </object>
   <object id="44" name="north sign" type="rectangle" x="420" y="48" width="24" height="12">
    <properties>
     <property name="collision" type="bool" value="true"/>
@@ -420,25 +426,40 @@
     <property name="collision" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="53" name="home front" type="rectangle" x="250" y="272" width="80" height="70">
-   <properties>
-    <property name="collision" type="bool" value="true"/>
-   </properties>
-  </object>
  </objectgroup>
  <objectgroup id="6" name="player">
   <object id="6" name="player" x="384" y="384">
    <point/>
   </object>
- </objectgroup>
- <objectgroup id="7" name="tp">
-  <object id="31" name="1" x="384" y="0" width="32" height="32"/>
-  <object id="32" name="3" x="768" y="384" width="32" height="32"/>
-  <object id="33" name="5" x="384" y="768" width="32" height="32"/>
-  <object id="35" name="7" x="0" y="384" width="32" height="32"/>
-  <object id="49" name="starting_home" x="256" y="336" width="32" height="16"/>
   <object id="55" name="home exit" x="256" y="352">
    <point/>
+  </object>
+ </objectgroup>
+ <objectgroup id="7" name="tp">
+  <object id="31" name="1" type="tp" x="384" y="0" width="32" height="16">
+   <properties>
+    <property name="collision" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="32" name="3" type="tp" x="784" y="384" width="16" height="32">
+   <properties>
+    <property name="collision" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="33" name="5" type="tp" x="384" y="784" width="32" height="16">
+   <properties>
+    <property name="collision" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="35" name="7" type="tp" x="0" y="384" width="16" height="32">
+   <properties>
+    <property name="collision" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="49" name="starting_home" type="tp" x="266" y="336" width="16" height="16">
+   <properties>
+    <property name="collision" type="bool" value="true"/>
+   </properties>
   </object>
  </objectgroup>
 </map>

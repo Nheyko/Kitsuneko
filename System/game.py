@@ -33,7 +33,8 @@ class Game:
         self.character_group.add(self.character.get_collider_sprite())
 
         # Création de la carte
-        self.map = Map(self.window)
+        url = 'Assets/Maps/starting_village.tmx'
+        self.map = Map(self.window, url, 4)
         self.map.set_map_layer_zoom(self.window)
 
         # Ajout des Sprites des personnages sur la carte
@@ -56,6 +57,7 @@ class Game:
 
         # Création d'une nouvelle surface
         self.map_surface = pygame.Surface((self.map.get_width(), self.map.get_height()), pygame.SRCALPHA)
+        self.map_surface.set_alpha(100)
 
         # Création d'un nouvel objet Sprite
         self.map_surface_sprite = Sprite()
@@ -64,12 +66,17 @@ class Game:
 
         # Ajout de tous mes objets qui possede des collisions et un sprite dans mon groupe d'objet
         for collider_object in self.collider_objects:
+
             if collider_object.type == 'polygon':
                 polygon = Polygon(collider_object)
                 self.colliders.append(polygon)
             elif collider_object.type == 'rectangle':
                 rectangle = Rectangle(collider_object)
                 self.colliders.append(rectangle)
+            elif collider_object.type == 'tp':
+                rectangle = Rectangle(collider_object)
+                self.colliders.append(rectangle)
+                
 
         # Converti la surface en Sprite pour pouvoir afficher les colliders
         self.map_surface_sprite.convert_surface_to_sprite(self.map_surface)
@@ -100,7 +107,28 @@ class Game:
 
         print("CharaColyX = ", self.character.get_collider_sprite().get_position().x)
         print("CharaColyY = ", self.character.get_collider_sprite().get_position().y)
+    
+    # Debug function
+    def debug(self):
 
+        if self.antispam == True and pygame.time.get_ticks() - self.starttime >= 500:
+            self.antispam = False
+
+        if self.keyboard_input.is_letter_key_pressed():
+            if(self.map.is_debug_layer_activated() == False and self.antispam == False):
+                self.starttime = pygame.time.get_ticks()
+                self.map.add_sprite(self.map_surface_sprite)
+                self.show_coordinate()
+                self.character.get_collider_sprite().set_collider_surface_alpha(100)
+                self.antispam = True
+            
+            elif self.map.is_debug_layer_activated() == True and self.antispam == False:
+                self.map.remove_sprite(self.map_surface_sprite)
+                self.starttime = pygame.time.get_ticks()
+                self.show_coordinate()
+                self.character.get_collider_sprite().set_collider_surface_alpha(0)
+                self.antispam = True
+    
     def update(self):
 
          # Met à jour la position du joueur quand il se déplace
@@ -115,24 +143,6 @@ class Game:
 
         # Met à jour l'écran
         pygame.display.flip()
-
-    def debug(self):
-
-        if self.antispam == True and pygame.time.get_ticks() - self.starttime >= 500:
-            self.antispam = False
-
-        if self.keyboard_input.is_letter_key_pressed():
-            if(self.map.is_debug_layer_activated() == False and self.antispam == False):
-                self.starttime = pygame.time.get_ticks()
-                self.map.add_sprite(self.map_surface_sprite)
-                self.show_coordinate()
-                self.antispam = True
-            
-            elif self.map.is_debug_layer_activated() == True and self.antispam == False:
-                self.map.remove_sprite(self.map_surface_sprite)
-                self.starttime = pygame.time.get_ticks()
-                self.show_coordinate()
-                self.antispam = True
 
     def run(self):
 
