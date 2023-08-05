@@ -6,9 +6,9 @@ class Collision:
 
     def __init__(self) -> None:
         self.collider_objects = []
-        self.is_polygon = False
-        self.is_rectangle = False
-        self.is_tp = False
+        self.is_polygon = None
+        self.is_rectangle = None
+        self.is_tp = None
         self.url = ""
 
     def add_collider_objects(self, objects):
@@ -141,8 +141,8 @@ class Collision:
     
     def get_collider_objects(self):
         return self.collider_objects
-    
-    def motor(self, keyboard_input, character, colliders, map):
+
+    def motor(self, keyboard_input, character, colliders, tilewidth, tileheight):
 
         if pygame.key.get_pressed():
             if keyboard_input.is_direction_key_pressed():
@@ -169,7 +169,7 @@ class Collision:
                             # Permet de contourner les coins pour pas se retrouver coincer dedans
                             # Coin Haut Droite
                             if self.check_collision(character, colliders, Direction.UP_RIGHT) == True\
-                                and self.check_collision(character, colliders, Direction.UP_LEFT, map.get_tmx_data().tilewidth, map.get_tmx_data().tileheight) == False\
+                                and self.check_collision(character, colliders, Direction.UP_LEFT, tilewidth, tileheight) == False\
                                 and self.get_is_polygon() == True:
                                 
                                 if keyboard_input.direction_of(keyboard_input.key_pressed()) == Direction.UP:
@@ -179,7 +179,7 @@ class Collision:
                             # # Permet de contourner les coins pour pas se retrouver coincer dedans
                             # # Coin Haut Gauche
                             if self.check_collision(character, colliders, Direction.UP_LEFT) == True\
-                                and self.check_collision(character, colliders, Direction.UP_RIGHT, map.get_tmx_data().tilewidth, map.get_tmx_data().tileheight) == False\
+                                and self.check_collision(character, colliders, Direction.UP_RIGHT, tilewidth, tileheight) == False\
                                     and self.get_is_polygon() == True:
 
                                 if keyboard_input.direction_of(keyboard_input.key_pressed()) == Direction.UP:
@@ -240,7 +240,7 @@ class Collision:
                             # Coin Bas Gauche
                             if self.check_collision(character, colliders, Direction.DOWN_RIGHT) == True\
                                 and self.check_collision(character, colliders, Direction.DOWN_LEFT,\
-                                map.get_tmx_data().tilewidth, map.get_tmx_data().tileheight) == False\
+                                tilewidth, tileheight) == False\
                                 and self.get_is_polygon() == True:
 
                                 if keyboard_input.direction_of(keyboard_input.key_pressed()) == Direction.DOWN:
@@ -250,7 +250,7 @@ class Collision:
                             # # Permet de contourner les coins pour pas se retrouver coincer dedans
                             # # Coin Bas Droite
                             if self.check_collision(character, colliders, Direction.DOWN_LEFT) == True\
-                                and self.check_collision(character, colliders, Direction.DOWN_RIGHT, map.get_tmx_data().tilewidth, map.get_tmx_data().tileheight) == False\
+                                and self.check_collision(character, colliders, Direction.DOWN_RIGHT, tilewidth, tileheight) == False\
                                 and self.get_is_polygon() == True:
 
                                 if keyboard_input.direction_of(keyboard_input.key_pressed()) == Direction.DOWN:
@@ -309,7 +309,7 @@ class Collision:
                             # Permet de contourner les coins pour pas se retrouver coincer dedans
                             # Coin Bas Gauche
                             if self.check_collision(character, colliders, Direction.UP_LEFT) == True\
-                            and self.check_collision(character, colliders, Direction.DOWN_LEFT, map.get_tmx_data().tilewidth, map.get_tmx_data().tileheight) == False\
+                            and self.check_collision(character, colliders, Direction.DOWN_LEFT, tilewidth, tileheight) == False\
                             and self.get_is_polygon() == True:
 
                                 if keyboard_input.direction_of(keyboard_input.key_pressed()) == Direction.LEFT:
@@ -319,7 +319,7 @@ class Collision:
                             # # Permet de contourner les coins pour pas se retrouver coincer dedans
                             # # Coin Haut Gauche
                             if self.check_collision(character, colliders, Direction.DOWN_LEFT) == True\
-                            and self.check_collision(character, colliders, Direction.UP_LEFT, map.get_tmx_data().tilewidth, map.get_tmx_data().tileheight) == False\
+                            and self.check_collision(character, colliders, Direction.UP_LEFT, tilewidth, tileheight) == False\
                             and self.get_is_polygon() == True:
 
                                 if keyboard_input.direction_of(keyboard_input.key_pressed()) == Direction.LEFT:
@@ -377,7 +377,7 @@ class Collision:
                             # Permet de contourner les coins pour pas se retrouver coincer dedans
                             # Coin Haut Droite
                             if self.check_collision(character, colliders, Direction.DOWN_RIGHT) == True\
-                            and self.check_collision(character, colliders, Direction.UP_RIGHT, map.get_tmx_data().tilewidth, map.get_tmx_data().tileheight) == False\
+                            and self.check_collision(character, colliders, Direction.UP_RIGHT, tilewidth, tileheight) == False\
                             and self.get_is_polygon() == True:
 
                                 if keyboard_input.direction_of(keyboard_input.key_pressed()) == Direction.RIGHT:
@@ -387,7 +387,7 @@ class Collision:
                             # # Permet de contourner les coins pour pas se retrouver coincer dedans
                             # # Coin Bas Droite
                             if self.check_collision(character, colliders, Direction.UP_RIGHT) == True\
-                            and self.check_collision(character, colliders, Direction.DOWN_RIGHT, map.get_tmx_data().tilewidth, map.get_tmx_data().tileheight) == False\
+                            and self.check_collision(character, colliders, Direction.DOWN_RIGHT, tilewidth, tileheight) == False\
                             and self.get_is_polygon() == True:
 
                                 if keyboard_input.direction_of(keyboard_input.key_pressed()) == Direction.RIGHT:

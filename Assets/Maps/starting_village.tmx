@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="57">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="58">
  <tileset firstgid="1" source="nature.tsx"/>
  <tileset firstgid="721" source="house.tsx"/>
  <layer id="1" name="background" width="50" height="50">
@@ -330,100 +330,117 @@
   <object id="15" name="wall sw" type="polygon" x="0" y="416">
    <properties>
     <property name="collision" type="bool" value="true"/>
+    <property name="do_corners_slip" type="bool" value="true"/>
    </properties>
    <polygon points="0,0 32,0 32,352 384,352 384,384 0,384"/>
   </object>
   <object id="14" name="wall se" type="polygon" x="416" y="416">
    <properties>
     <property name="collision" type="bool" value="true"/>
+    <property name="do_corners_slip" type="bool" value="true"/>
    </properties>
    <polygon points="384,0 384,384 0,384 0,352 352,352 352,0"/>
   </object>
   <object id="13" name="wall ne" type="polygon" x="416" y="0">
    <properties>
     <property name="collision" type="bool" value="true"/>
+    <property name="do_corners_slip" type="bool" value="true"/>
    </properties>
    <polygon points="0,0 384,0 384,384 352,384 352,32 0,32"/>
   </object>
   <object id="12" name="wall nw" type="polygon" x="0" y="0">
    <properties>
     <property name="collision" type="bool" value="true"/>
+    <property name="do_corners_slip" type="bool" value="true"/>
    </properties>
    <polygon points="384,0 384,32 32,32 32,384 0,384 0,0"/>
   </object>
   <object id="9" name="water sw" type="polygon" x="160" y="416">
    <properties>
     <property name="collision" type="bool" value="true"/>
+    <property name="do_corners_slip" type="bool" value="true"/>
    </properties>
    <polygon points="0,0 32,0 32,192 224,192 224,224 0,224"/>
   </object>
   <object id="11" name="water se" type="polygon" x="416" y="416">
    <properties>
     <property name="collision" type="bool" value="true"/>
+    <property name="do_corners_slip" type="bool" value="true"/>
    </properties>
    <polygon points="224,0 192,0 192,192 0,192 0,224 224,224"/>
   </object>
   <object id="10" name="water ne" type="polygon" x="416" y="160">
    <properties>
     <property name="collision" type="bool" value="true"/>
+    <property name="do_corners_slip" type="bool" value="true"/>
    </properties>
    <polygon points="0,0 224,0 224,224 192,224 192,32 0,32"/>
   </object>
   <object id="8" name="water nw" type="polygon" x="160" y="160">
    <properties>
     <property name="collision" type="bool" value="true"/>
+    <property name="do_corners_slip" type="bool" value="true"/>
    </properties>
    <polygon points="0,0 224,0 224,32 32,32 32,224 0,224"/>
-  </object>
-  <object id="56" name="home front" type="polygon" x="250" y="272">
-   <properties>
-    <property name="collision" type="bool" value="true"/>
-   </properties>
-   <polygon points="0,0 80,0 80,70 0,70"/>
   </object>
   <object id="44" name="north sign" type="rectangle" x="420" y="48" width="24" height="12">
    <properties>
     <property name="collision" type="bool" value="true"/>
+    <property name="do_corners_slip" type="bool" value="false"/>
    </properties>
   </object>
   <object id="38" name="tree" type="rectangle" x="88" y="96" width="16" height="12">
    <properties>
     <property name="collision" type="bool" value="true"/>
+    <property name="do_corners_slip" type="bool" value="false"/>
    </properties>
   </object>
   <object id="39" name="west sign" type="rectangle" x="36" y="368" width="24" height="12">
    <properties>
     <property name="collision" type="bool" value="true"/>
+    <property name="do_corners_slip" type="bool" value="false"/>
    </properties>
   </object>
   <object id="40" name="tree" type="rectangle" x="88" y="704" width="16" height="12">
    <properties>
     <property name="collision" type="bool" value="true"/>
+    <property name="do_corners_slip" type="bool" value="false"/>
    </properties>
   </object>
   <object id="45" name="south sign" type="rectangle" x="356" y="752" width="24" height="12">
    <properties>
     <property name="collision" type="bool" value="true"/>
+    <property name="do_corners_slip" type="bool" value="false"/>
    </properties>
   </object>
   <object id="41" name="tree" type="rectangle" x="696" y="704" width="16" height="12">
    <properties>
     <property name="collision" type="bool" value="true"/>
+    <property name="do_corners_slip" type="bool" value="false"/>
    </properties>
   </object>
   <object id="42" name="east sign" type="rectangle" x="740" y="432" width="24" height="12">
    <properties>
     <property name="collision" type="bool" value="true"/>
+    <property name="do_corners_slip" type="bool" value="false"/>
    </properties>
   </object>
   <object id="52" name="home sign" type="rectangle" x="228" y="336" width="24" height="12">
    <properties>
     <property name="collision" type="bool" value="true"/>
+    <property name="do_corners_slip" type="bool" value="false"/>
    </properties>
   </object>
   <object id="43" name="tree" type="rectangle" x="696" y="96" width="16" height="12">
    <properties>
     <property name="collision" type="bool" value="true"/>
+    <property name="do_corners_slip" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="57" name="home_front" type="rectangle" x="250" y="272" width="80" height="70">
+   <properties>
+    <property name="collision" type="bool" value="true"/>
+    <property name="do_corners_slip" type="bool" value="true"/>
    </properties>
   </object>
  </objectgroup>

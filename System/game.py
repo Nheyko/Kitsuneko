@@ -76,7 +76,6 @@ class Game:
             elif collider_object.type == 'tp':
                 rectangle = Rectangle(collider_object)
                 self.colliders.append(rectangle)
-                
 
         # Converti la surface en Sprite pour pouvoir afficher les colliders
         self.map_surface_sprite.convert_surface_to_sprite(self.map_surface)
@@ -154,7 +153,7 @@ class Game:
         while running:
 
             self.debug()
-            self.collision.motor(self.keyboard_input, self.character, self.colliders, self.map)
+            self.collision.motor(self.keyboard_input, self.character, self.colliders, self.map.get_tmx_data().tilewidth, self.map.get_tmx_data().tileheight)
             self.update()
 
             for event in pygame.event.get():
