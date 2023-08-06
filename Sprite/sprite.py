@@ -26,9 +26,16 @@ class Sprite(pygame.sprite.Sprite):
         self.position = Coordinate()
 
         self.direction = Direction.NONE
+        self.do_corners_slip = False
 
         self.image = pygame.Surface((0,0))
         self.rect = self.image.get_rect()
+
+    def set_do_corners_slip(self, bool):
+        self.do_corners_slip = bool
+
+    def get_do_corners_slip(self):
+        return self.do_corners_slip
 
     def set_character_sprite(self, url):
 

@@ -15,6 +15,11 @@ class Rectangle():
         self.sprite.set_name(rectangle_object.name)
         self.sprite.set_type(rectangle_object.type)
         self.sprite.set_collider(surface)
+        if 'do_corners_slip' in rectangle_object.properties.keys():
+                if rectangle_object.properties['do_corners_slip'] == True:
+                    self.sprite.set_do_corners_slip(True)
+                else:
+                     self.sprite.set_do_corners_slip(False)
 
     def get_sprite(self):
         return self.sprite

@@ -9,7 +9,20 @@ class Collision:
         self.is_polygon = None
         self.is_rectangle = None
         self.is_tp = None
+        self.do_corners_slip = False
         self.url = ""
+
+    def set_do_corners_slip(self, bool):
+        self.do_corners_slip = bool
+
+    def get_do_corners_slip(self):
+        return self.do_corners_slip
+
+    def check_do_corners_slip(self, collider):
+        if collider.get_sprite().get_do_corners_slip() == True:
+            self.set_do_corners_slip(True)
+        else:
+            self.set_do_corners_slip(False)
 
     def add_collider_objects(self, objects):
         for obj in objects:
@@ -74,6 +87,7 @@ class Collision:
                     self.check_if_polygon(collider)
                     self.check_if_rectangle(collider)
                     self.check_if_tp(collider)
+                    self.check_do_corners_slip(collider)
                     return True
                 
             if direction == Direction.UP_LEFT:
@@ -81,6 +95,7 @@ class Collision:
                     self.check_if_polygon(collider)
                     self.check_if_rectangle(collider)
                     self.check_if_tp(collider)
+                    self.check_do_corners_slip(collider)
                     return True
                 
             if direction == Direction.UP_RIGHT:
@@ -88,6 +103,7 @@ class Collision:
                     self.check_if_polygon(collider)
                     self.check_if_rectangle(collider)
                     self.check_if_tp(collider)
+                    self.check_do_corners_slip(collider)
                     return True
                 
             if direction == Direction.DOWN:
@@ -95,6 +111,7 @@ class Collision:
                     self.check_if_polygon(collider)
                     self.check_if_rectangle(collider)
                     self.check_if_tp(collider)
+                    self.check_do_corners_slip(collider)
                     return True
                 
             if direction == Direction.DOWN_LEFT:
@@ -102,6 +119,7 @@ class Collision:
                     self.check_if_polygon(collider)
                     self.check_if_rectangle(collider)
                     self.check_if_tp(collider)
+                    self.check_do_corners_slip(collider)
                     return True
                 
             if direction == Direction.DOWN_RIGHT:
@@ -109,6 +127,7 @@ class Collision:
                     self.check_if_polygon(collider)
                     self.check_if_rectangle(collider)
                     self.check_if_tp(collider)
+                    self.check_do_corners_slip(collider)
                     return True
                 
             if direction == Direction.LEFT:
@@ -116,6 +135,7 @@ class Collision:
                     self.check_if_polygon(collider)
                     self.check_if_rectangle(collider)
                     self.check_if_tp(collider)
+                    self.check_do_corners_slip(collider)
                     return True
                 
             if direction == Direction.RIGHT:
@@ -123,6 +143,7 @@ class Collision:
                     self.check_if_polygon(collider)
                     self.check_if_rectangle(collider)
                     self.check_if_tp(collider)
+                    self.check_do_corners_slip(collider)
                     return True
                 
         return False
@@ -170,7 +191,7 @@ class Collision:
                             # Coin Haut Droite
                             if self.check_collision(character, colliders, Direction.UP_RIGHT) == True\
                                 and self.check_collision(character, colliders, Direction.UP_LEFT, tilewidth, tileheight) == False\
-                                and self.get_is_polygon() == True:
+                                and self.get_do_corners_slip() == True:
                                 
                                 if keyboard_input.direction_of(keyboard_input.key_pressed()) == Direction.UP:
                                     character.get_sprite().move(character.get_move_speed(), Direction.LEFT, character.get_sprite().get_direction(), False)
@@ -180,7 +201,7 @@ class Collision:
                             # # Coin Haut Gauche
                             if self.check_collision(character, colliders, Direction.UP_LEFT) == True\
                                 and self.check_collision(character, colliders, Direction.UP_RIGHT, tilewidth, tileheight) == False\
-                                    and self.get_is_polygon() == True:
+                                    and self.get_do_corners_slip() == True:
 
                                 if keyboard_input.direction_of(keyboard_input.key_pressed()) == Direction.UP:
                                     character.get_sprite().move(character.get_move_speed(), Direction.RIGHT, character.get_sprite().get_direction(), False)
@@ -241,7 +262,7 @@ class Collision:
                             if self.check_collision(character, colliders, Direction.DOWN_RIGHT) == True\
                                 and self.check_collision(character, colliders, Direction.DOWN_LEFT,\
                                 tilewidth, tileheight) == False\
-                                and self.get_is_polygon() == True:
+                                and self.get_do_corners_slip() == True:
 
                                 if keyboard_input.direction_of(keyboard_input.key_pressed()) == Direction.DOWN:
                                     character.get_sprite().move(character.get_move_speed(), Direction.LEFT, character.get_sprite().get_direction(), False)
@@ -251,7 +272,7 @@ class Collision:
                             # # Coin Bas Droite
                             if self.check_collision(character, colliders, Direction.DOWN_LEFT) == True\
                                 and self.check_collision(character, colliders, Direction.DOWN_RIGHT, tilewidth, tileheight) == False\
-                                and self.get_is_polygon() == True:
+                                and self.get_do_corners_slip() == True:
 
                                 if keyboard_input.direction_of(keyboard_input.key_pressed()) == Direction.DOWN:
                                     character.get_sprite().move(character.get_move_speed(), Direction.RIGHT, character.get_sprite().get_direction(), False)
@@ -310,7 +331,7 @@ class Collision:
                             # Coin Bas Gauche
                             if self.check_collision(character, colliders, Direction.UP_LEFT) == True\
                             and self.check_collision(character, colliders, Direction.DOWN_LEFT, tilewidth, tileheight) == False\
-                            and self.get_is_polygon() == True:
+                            and self.get_do_corners_slip() == True:
 
                                 if keyboard_input.direction_of(keyboard_input.key_pressed()) == Direction.LEFT:
                                     character.get_sprite().move(character.get_move_speed(), Direction.DOWN, character.get_sprite().get_direction(), False)
@@ -320,7 +341,7 @@ class Collision:
                             # # Coin Haut Gauche
                             if self.check_collision(character, colliders, Direction.DOWN_LEFT) == True\
                             and self.check_collision(character, colliders, Direction.UP_LEFT, tilewidth, tileheight) == False\
-                            and self.get_is_polygon() == True:
+                            and self.get_do_corners_slip() == True:
 
                                 if keyboard_input.direction_of(keyboard_input.key_pressed()) == Direction.LEFT:
                                     character.get_sprite().move(character.get_move_speed(), Direction.UP, character.get_sprite().get_direction(), False)
@@ -378,7 +399,7 @@ class Collision:
                             # Coin Haut Droite
                             if self.check_collision(character, colliders, Direction.DOWN_RIGHT) == True\
                             and self.check_collision(character, colliders, Direction.UP_RIGHT, tilewidth, tileheight) == False\
-                            and self.get_is_polygon() == True:
+                            and self.get_do_corners_slip() == True:
 
                                 if keyboard_input.direction_of(keyboard_input.key_pressed()) == Direction.RIGHT:
                                     character.get_sprite().move(character.get_move_speed(), Direction.UP, character.get_sprite().get_direction(), False)
@@ -388,7 +409,7 @@ class Collision:
                             # # Coin Bas Droite
                             if self.check_collision(character, colliders, Direction.UP_RIGHT) == True\
                             and self.check_collision(character, colliders, Direction.DOWN_RIGHT, tilewidth, tileheight) == False\
-                            and self.get_is_polygon() == True:
+                            and self.get_do_corners_slip() == True:
 
                                 if keyboard_input.direction_of(keyboard_input.key_pressed()) == Direction.RIGHT:
                                     character.get_sprite().move(character.get_move_speed(), Direction.DOWN, character.get_sprite().get_direction(), False)
@@ -435,4 +456,5 @@ class Collision:
                                     character.get_collider_sprite().move_collider(character.get_move_speed(), Direction.LEFT)
 
                     elif self.get_is_tp() == True:
+                        # load map
                         pass

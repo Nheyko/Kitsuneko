@@ -16,6 +16,11 @@ class Polygon():
         self.sprite.set_name(polygon_object.name)
         self.sprite.set_type(polygon_object.type)
         self.sprite.set_collider(surface)
+        if 'do_corners_slip' in polygon_object.properties.keys():
+                if polygon_object.properties['do_corners_slip'] == True:
+                    self.sprite.set_do_corners_slip(True)
+                else:
+                     self.sprite.set_do_corners_slip(False)
 
     def get_sprite(self):
         return self.sprite
