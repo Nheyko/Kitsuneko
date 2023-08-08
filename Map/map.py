@@ -43,17 +43,8 @@ class Map:
         return self.tmx_data
     
     def search_all_objects(self):
-        obstacle_layer = self.tmx_data.get_layer_by_name('obstacle')
-        for obstacle in obstacle_layer:
-            self.map_objects.append(obstacle)
-
-        player_layer = self.tmx_data.get_layer_by_name('player')
-        for player in player_layer:
-            self.map_objects.append(player)
-
-        tp_layer = self.tmx_data.get_layer_by_name('tp')
-        for tp in tp_layer:
-            self.map_objects.append(tp)
+        for object in self.tmx_data.objects:
+            self.map_objects.append(object)
 
     def get_map_objects(self):
         return self.map_objects
@@ -72,7 +63,7 @@ class Map:
     
     def load_map(self, window, url, max_layer):
         # Chargement de la carte
-        self.tmx_data = pytmx.util_pygame.load_pygame(url)
+        self.tmx_data = pytmx.load_pygame(url)
         map_data = pyscroll.data.TiledMapData(self.tmx_data)
         self.map_layer = pyscroll.orthographic.BufferedRenderer(map_data, window.get_screen().get_size())
         self.map = pyscroll.PyscrollGroup(map_layer=self.map_layer, default_layer=max_layer)
