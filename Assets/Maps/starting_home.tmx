@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="25" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="13" nextobjectid="5">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="25" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="14" nextobjectid="36">
  <tileset firstgid="1" source="house.tsx"/>
  <layer id="1" name="floor" width="25" height="25">
   <data encoding="csv">
@@ -117,6 +117,195 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
+ <objectgroup id="13" name="obstacle">
+  <object id="7" type="rectangle" x="96" y="224" width="16" height="48">
+   <properties>
+    <property name="collision" type="bool" value="true"/>
+    <property name="do_corners_slip" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="8" type="rectangle" x="16" y="256" width="80" height="16">
+   <properties>
+    <property name="collision" type="bool" value="true"/>
+    <property name="do_corners_slip" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="9" type="rectangle" x="288" y="176" width="16" height="32">
+   <properties>
+    <property name="collision" type="bool" value="true"/>
+    <property name="do_corners_slip" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="10" type="rectangle" x="304" y="176" width="64" height="16">
+   <properties>
+    <property name="collision" type="bool" value="true"/>
+    <property name="do_corners_slip" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="11" type="rectangle" x="288" y="240" width="16" height="32">
+   <properties>
+    <property name="collision" type="bool" value="true"/>
+    <property name="do_corners_slip" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="12" type="rectangle" x="304" y="256" width="64" height="16">
+   <properties>
+    <property name="collision" type="bool" value="true"/>
+    <property name="do_corners_slip" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="13" type="rectangle" x="368" y="0" width="16" height="400">
+   <properties>
+    <property name="collision" type="bool" value="true"/>
+    <property name="do_corners_slip" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="14" type="rectangle" x="0" y="0" width="16" height="400">
+   <properties>
+    <property name="collision" type="bool" value="true"/>
+    <property name="do_corners_slip" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="15" type="rectangle" x="16" y="384" width="352" height="16">
+   <properties>
+    <property name="collision" type="bool" value="true"/>
+    <property name="do_corners_slip" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="16" type="rectangle" x="96" y="16" width="16" height="176">
+   <properties>
+    <property name="collision" type="bool" value="true"/>
+    <property name="do_corners_slip" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="17" type="rectangle" x="112" y="176" width="144" height="16">
+   <properties>
+    <property name="collision" type="bool" value="true"/>
+    <property name="do_corners_slip" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="18" type="rectangle" x="272" y="16" width="16" height="112">
+   <properties>
+    <property name="collision" type="bool" value="true"/>
+    <property name="do_corners_slip" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="19" type="rectangle" x="288" y="112" width="48" height="16">
+   <properties>
+    <property name="collision" type="bool" value="true"/>
+    <property name="do_corners_slip" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="20" type="rectangle" x="16" y="0" width="352" height="48">
+   <properties>
+    <property name="collision" type="bool" value="true"/>
+    <property name="do_corners_slip" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="21" type="rectangle" x="16" y="112" width="32" height="16">
+   <properties>
+    <property name="collision" type="bool" value="true"/>
+    <property name="do_corners_slip" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="22" type="rectangle" x="80" y="112" width="16" height="16">
+   <properties>
+    <property name="collision" type="bool" value="true"/>
+    <property name="do_corners_slip" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="23" name="tv" type="polygon" x="31" y="48">
+   <properties>
+    <property name="collision" type="bool" value="true"/>
+    <property name="do_corners_slide" type="bool" value="true"/>
+   </properties>
+   <polygon points="0,0 29,0 29,10 0,10"/>
+  </object>
+  <object id="24" name="tv_bench" type="polygon" x="22" y="71">
+   <properties>
+    <property name="collision" type="bool" value="true"/>
+    <property name="do_corners_slide" type="bool" value="true"/>
+   </properties>
+   <polygon points="0,0 46,0 46,19 0,19"/>
+  </object>
+  <object id="25" name="restroom_bench" type="polygon" x="22" y="183">
+   <properties>
+    <property name="collision" type="bool" value="true"/>
+    <property name="do_corners_slide" type="bool" value="true"/>
+   </properties>
+   <polygon points="0,0 46,0 46,19 0,19"/>
+  </object>
+  <object id="26" name="restroom_table" type="polygon" x="22" y="215">
+   <properties>
+    <property name="collision" type="bool" value="true"/>
+    <property name="do_corners_slide" type="bool" value="true"/>
+   </properties>
+   <polygon points="0,0 46,0 46,36 0,36"/>
+  </object>
+  <object id="27" name="kitchen_table" type="polygon" x="333" y="203">
+   <properties>
+    <property name="collision" type="bool" value="true"/>
+    <property name="do_corners_slide" type="bool" value="true"/>
+   </properties>
+   <polygon points="0,0 32,0 32,32 0,32"/>
+  </object>
+  <object id="28" name="fridge" type="polygon" x="302" y="48">
+   <properties>
+    <property name="collision" type="bool" value="true"/>
+    <property name="do_corners_slide" type="bool" value="true"/>
+   </properties>
+   <polygon points="0,0 0,10 14,10 14,0"/>
+  </object>
+  <object id="29" name="sink" type="polygon" x="333" y="48">
+   <properties>
+    <property name="collision" type="bool" value="true"/>
+    <property name="do_corners_slide" type="bool" value="true"/>
+   </properties>
+   <polygon points="0,0 0,10 32,10 32,0"/>
+  </object>
+  <object id="30" name="library 1" type="polygon" x="126" y="48">
+   <properties>
+    <property name="collision" type="bool" value="true"/>
+    <property name="do_corners_slide" type="bool" value="true"/>
+   </properties>
+   <polygon points="0,0 0,10 30,10 30,0"/>
+  </object>
+  <object id="31" name="library 2" type="polygon" x="174" y="48">
+   <properties>
+    <property name="collision" type="bool" value="true"/>
+    <property name="do_corners_slide" type="bool" value="true"/>
+   </properties>
+   <polygon points="0,0 0,10 30,10 30,0"/>
+  </object>
+  <object id="32" name="library 3" type="polygon" x="222" y="48">
+   <properties>
+    <property name="collision" type="bool" value="true"/>
+    <property name="do_corners_slide" type="bool" value="true"/>
+   </properties>
+   <polygon points="0,0 0,10 30,10 30,0"/>
+  </object>
+  <object id="33" name="bed 3" type="polygon" x="224" y="82.1818">
+   <properties>
+    <property name="collision" type="bool" value="true"/>
+    <property name="do_corners_slide" type="bool" value="true"/>
+   </properties>
+   <polygon points="0,0 26,0 26,40 0,40"/>
+  </object>
+  <object id="34" name="bed 2" type="polygon" x="175.636" y="82.1818">
+   <properties>
+    <property name="collision" type="bool" value="true"/>
+    <property name="do_corners_slide" type="bool" value="true"/>
+   </properties>
+   <polygon points="0,0 26,0 26,40 0,40"/>
+  </object>
+  <object id="35" name="bed 1" type="polygon" x="128" y="82">
+   <properties>
+    <property name="collision" type="bool" value="true"/>
+    <property name="do_corners_slide" type="bool" value="true"/>
+   </properties>
+   <polygon points="0,0 26,0 26,40 0,40"/>
+  </object>
+ </objectgroup>
  <objectgroup id="11" name="tp">
   <object id="2" name="starting_village" x="176" y="368" width="32" height="16"/>
  </objectgroup>
