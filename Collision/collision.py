@@ -485,5 +485,5 @@ class Collision:
                                     character.get_sprite().move(character.get_move_speed(), Direction.LEFT, character.get_sprite().get_direction())
                                     character.get_collider_sprite().move_collider(character.get_move_speed(), Direction.LEFT)
 
-                    elif self.get_is_tp() == True:
+                    if self.get_is_tp() == True:
                         map.load_map(window, self.get_url(), character, character_group, self)

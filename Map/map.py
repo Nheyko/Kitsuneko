@@ -75,6 +75,7 @@ class Map:
     def get_map_surface_sprite(self):
         return self.map_surface_sprite
 
+    # Le dernier layer doit toujours être celui ou le personnage passe derriè visuellement
     def calculate_max_layer(self, tmx_data):
 
         # -1 Car ça commence à 0
