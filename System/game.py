@@ -41,24 +41,6 @@ class Game:
         self.map = Map(self.window, url, 4, self.character, self.character_group, self.collision)
         self.map.set_map_layer_zoom(self.window)
 
-        # Debug
-        # Création d'une nouvelle surface
-        self.map_surface = pygame.Surface((self.map.get_width(), self.map.get_height()), pygame.SRCALPHA)
-        self.map_surface.set_alpha(100)
-
-        # Debug
-        # Création d'un nouvel objet Sprite
-        self.map_surface_sprite = Sprite()
-
-        # Debug
-        # Converti la surface en Sprite pour pouvoir afficher les colliders
-        self.map_surface_sprite.convert_surface_to_sprite(self.map_surface)
-
-        # Debug
-        # Déssine tous les objets qui sont des colliders sur la surface self.map_surface
-        # Permet de les afficher avec map.add_surface plus tard
-        self.collision.draw_colliders_on_surface(self.map_surface)
-
     # Debug function
     def show_coordinate(self):
 
@@ -77,13 +59,13 @@ class Game:
         if self.keyboard_input.is_letter_key_pressed():
             if(self.map.is_debug_layer_activated() == False and self.antispam == False):
                 self.starttime = pygame.time.get_ticks()
-                self.map.add_sprite(self.map_surface_sprite)
+                self.map.add_sprite(self.map.get_map_surface_sprite())
                 self.show_coordinate()
                 self.character.get_collider_sprite().set_collider_surface_alpha(100)
                 self.antispam = True
             
             elif self.map.is_debug_layer_activated() == True and self.antispam == False:
-                self.map.remove_sprite(self.map_surface_sprite)
+                self.map.remove_sprite(self.map.get_map_surface_sprite())
                 self.starttime = pygame.time.get_ticks()
                 self.show_coordinate()
                 self.character.get_collider_sprite().set_collider_surface_alpha(0)

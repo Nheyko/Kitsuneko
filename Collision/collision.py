@@ -3,7 +3,6 @@ import pygame
 from Sprite.direction import Direction
 from Sprite.rectangle import Rectangle
 from Sprite.polygon import Polygon
-from Sprite.sprite import Sprite
 
 class Collision:
 

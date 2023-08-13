@@ -1,5 +1,8 @@
+import pygame
 import pytmx
 import pyscroll
+
+from Sprite.sprite import Sprite
 
 class Map:
 
@@ -7,6 +10,7 @@ class Map:
 
         self.map_objects = []
         self.debug_layer = False
+
         self.load_map(window, url, max_layer, character, character_group, collision)
 
     def add_sprites(self, sprites):
@@ -65,6 +69,9 @@ class Map:
     def clear_map_objects(self):
         self.map_objects = []
 
+    def get_map_surface_sprite(self):
+        return self.map_surface_sprite
+
     def load_map(self, window, url, max_layer, character, character_group, collision):
 
         # Chargement de la carte
@@ -73,6 +80,12 @@ class Map:
         self.map_layer = pyscroll.orthographic.BufferedRenderer(map_data, window.get_screen().get_size())
         self.map = pyscroll.PyscrollGroup(map_layer=self.map_layer, default_layer=max_layer)
         self.set_map_layer_zoom(window)
+
+        self.map_surface = pygame.Surface((self.get_width(), self.get_height()), pygame.SRCALPHA)
+        self.map_surface.set_alpha(100)
+
+        self.map_surface_sprite = Sprite()
+        self.map_surface_sprite.convert_surface_to_sprite(self.map_surface)
 
         # Ajout des Sprites des personnages sur la carte
         self.add_sprites(character_group)
@@ -86,6 +99,8 @@ class Map:
 
         collision.clear_colliders()
         collision.load_colliders()
+
+        collision.draw_colliders_on_surface(self.map_surface)
 
         # Obtention de la position du joueur par les données du tmx enregistré dans la carte
         character_position = self.get_tmx_data().get_object_by_name("player")
