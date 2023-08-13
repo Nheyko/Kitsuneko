@@ -307,10 +307,14 @@
   </object>
  </objectgroup>
  <objectgroup id="11" name="tp">
-  <object id="2" name="starting_village" x="176" y="368" width="32" height="16"/>
+  <object id="2" name="starting_village" type="tp" x="176" y="368" width="32" height="16">
+   <properties>
+    <property name="collision" type="bool" value="true"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup id="12" name="player">
-  <object id="3" name="home enter" x="176" y="336">
+  <object id="3" name="player" x="176" y="336">
    <point/>
   </object>
  </objectgroup>

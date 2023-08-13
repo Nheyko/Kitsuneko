@@ -3,10 +3,11 @@ import pyscroll
 
 class Map:
 
-    def __init__(self, window, url, max_layer):
+    def __init__(self, window, url, max_layer, character, character_group, collision):
 
-        # Chargement de la carte
-        self.load_map(window, url, max_layer)
+        self.map_objects = []
+        self.debug_layer = False
+        self.load_map(window, url, max_layer, character, character_group, collision)
 
     def add_sprites(self, sprites):
         for sprite in sprites:
@@ -61,13 +62,38 @@ class Map:
         if screen.get_screen_width() == 1600 and screen.get_screen_height() == 900:
             self.map_layer.zoom = 1.8
     
-    def load_map(self, window, url, max_layer):
+    def clear_map_objects(self):
+        self.map_objects = []
+
+    def load_map(self, window, url, max_layer, character, character_group, collision):
+
         # Chargement de la carte
         self.tmx_data = pytmx.load_pygame(url)
         map_data = pyscroll.data.TiledMapData(self.tmx_data)
         self.map_layer = pyscroll.orthographic.BufferedRenderer(map_data, window.get_screen().get_size())
         self.map = pyscroll.PyscrollGroup(map_layer=self.map_layer, default_layer=max_layer)
-        self.debug_layer = False
-        self.map_objects = []
-        self.map_layer.zoom = 1
-        
+        self.set_map_layer_zoom(window)
+
+        # Ajout des Sprites des personnages sur la carte
+        self.add_sprites(character_group)
+
+        self.clear_map_objects()
+        self.search_all_objects()
+
+        # On ajoute dans le tableau de l'objet tout les objects qui ont la propriété "collision"
+        collision.clear_collider_objects()
+        collision.add_collider_objects(self.get_map_objects())
+
+        collision.clear_colliders()
+        collision.load_colliders()
+
+        # Obtention de la position du joueur par les données du tmx enregistré dans la carte
+        character_position = self.get_tmx_data().get_object_by_name("player")
+
+        # Définit la position du joueur sur la carte | Position rect.topleft
+        character.get_sprite().set_position(character_position.x, character_position.y)
+        character.get_collider_sprite().set_position(character_position.x + ((character.get_sprite().get_sprite_width() - character.get_sprite().get_sprite_width() * 0.5) / 2), character_position.y + (character.get_sprite().get_sprite_height() / 2))
+
+        # Synchronise la position du rect avec la position du joueur pour éviter d'éventuel bugs
+        character.get_sprite().update_position()
+        character.get_collider_sprite().update_position()
