@@ -38,7 +38,7 @@ class Game:
 
         # Création de la carte
         url = 'Assets/Maps/starting_village.tmx'
-        self.map = Map(self.window, url, 4, self.character, self.character_group, self.collision)
+        self.map = Map(self.window, url, self.character, self.character_group, self.collision)
         self.map.set_map_layer_zoom(self.window)
 
     # Debug function

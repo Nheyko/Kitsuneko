@@ -6,12 +6,12 @@ from Sprite.sprite import Sprite
 
 class Map:
 
-    def __init__(self, window, url, max_layer, character, character_group, collision):
+    def __init__(self, window, url, character, character_group, collision):
 
         self.map_objects = []
         self.debug_layer = False
 
-        self.load_map(window, url, max_layer, character, character_group, collision)
+        self.load_map(window, url, character, character_group, collision)
 
     def add_sprites(self, sprites):
         for sprite in sprites:
@@ -72,14 +72,27 @@ class Map:
     def get_map_surface_sprite(self):
         return self.map_surface_sprite
 
-    def load_map(self, window, url, max_layer, character, character_group, collision):
+    def calculate_max_layer(self, tmx_data):
+
+        # -1 Car ça commence à 0
+        number_of_layer = -1
+
+        for _ in tmx_data.visible_tile_layers:
+            number_of_layer += 1
+
+        return number_of_layer - 1
+
+    def load_map(self, window, url, character, character_group, collision):
 
         # Chargement de la carte
         self.tmx_data = pytmx.load_pygame(url)
         map_data = pyscroll.data.TiledMapData(self.tmx_data)
         self.map_layer = pyscroll.orthographic.BufferedRenderer(map_data, window.get_screen().get_size())
+        max_layer = self.calculate_max_layer(self.tmx_data)
         self.map = pyscroll.PyscrollGroup(map_layer=self.map_layer, default_layer=max_layer)
         self.set_map_layer_zoom(window)
+
+
 
         self.map_surface = pygame.Surface((self.get_width(), self.get_height()), pygame.SRCALPHA)
         self.map_surface.set_alpha(100)
