@@ -63,8 +63,11 @@ class Map:
             self.map_layer.zoom = 1.2
         elif screen.get_screen_width() == 1024 and screen.get_screen_height() == 768:
             self.map_layer.zoom = 1.5
-        if screen.get_screen_width() == 1600 and screen.get_screen_height() == 900:
+        elif screen.get_screen_width() == 1600 and screen.get_screen_height() == 900:
             self.map_layer.zoom = 1.8
+
+        if self.tmx_data.width == 25 and self.tmx_data.height == 25:
+            self.map_layer.zoom = 1.5
     
     def clear_map_objects(self):
         self.map_objects = []
@@ -91,8 +94,6 @@ class Map:
         max_layer = self.calculate_max_layer(self.tmx_data)
         self.map = pyscroll.PyscrollGroup(map_layer=self.map_layer, default_layer=max_layer)
         self.set_map_layer_zoom(window)
-
-
 
         self.map_surface = pygame.Surface((self.get_width(), self.get_height()), pygame.SRCALPHA)
         self.map_surface.set_alpha(100)
